@@ -16,10 +16,13 @@
    appears between them, pointing at the second box; the selection ring clears.
 3. **Deselect without connecting**: click a box to select it, then click the same box again →
    ring clears, no connection created.
-4. **Edge-to-edge routing**: connect two boxes in the same perspective row (roughly
-   horizontal) and two boxes in different perspective rows (roughly vertical) → confirm the
-   curve in each case exits/enters at the boxes' edges (not floating from their centers) and
-   routes along the dominant axis, matching the design source's geometry.
+4. **Top-to-bottom routing**: connect two boxes in the same perspective row and two boxes in
+   different perspective rows → confirm the curve always exits the sending box's top-center
+   and enters the receiving box's bottom-center in both cases (not center-to-center, and not
+   dependent on whether the boxes are side by side or in different rows).
+4a. **No occlusion by intervening cards**: connect two boxes in the same row with a third box
+    positioned between them → the curve stays fully visible on top of that intervening card
+    along its whole path, not hidden/clipped behind it.
 5. **One edge per pair**: try to connect the same two boxes again (both click orders, A→B and
    B→A) → no duplicate or reverse connector is created either time.
 6. **Hover highlight**: hover over an existing connector line → it and its arrowhead switch to

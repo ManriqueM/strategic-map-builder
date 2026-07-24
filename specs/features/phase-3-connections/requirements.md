@@ -24,10 +24,12 @@ connection to remove it.
 - **One edge per pair**: only one connection may exist between any two given boxes, regardless
   of click order — if a connection already exists in either direction between the two boxes
   clicked, the click sequence is a no-op (selection still clears).
-- **Connector rendering**: SVG cubic-bezier curve from edge-to-edge between the two boxes'
-  borders (not center-to-center), with an arrowhead marker at the destination end, routed
-  vertically or horizontally depending on which axis dominates between the two box centers —
-  matches the original design source's geometry exactly.
+- **Connector rendering**: SVG cubic-bezier curve exiting the top-center of the sending
+  ("from") box and entering the bottom-center of the receiving ("to") box, with an arrowhead
+  marker at the destination end — a fixed top-to-bottom routing rule (not dependent on the
+  two boxes' relative position), matching the Balanced Scorecard convention where a
+  lower-perspective objective supports, and visually connects upward into, the objective it
+  points to.
 - **Hover / remove**: hovering a connector (via a wide invisible hit-path over the visible
   thin path) recolors it and its arrowhead to the "hot" (attention-red) color, thickens the
   stroke, and rings both of its endpoint boxes in their status color; clicking the connector
@@ -72,8 +74,10 @@ connection to remove it.
   perspective management) is Edit-mode-only chrome and is hidden in Connect mode; the
   interactive canvas uses the full content width, matching the finished-map look from the
   design source rather than the builder's two-column authoring layout.
-- **Geometry algorithm matches the design source.** Reuse its approach directly (recreated in
-  TypeScript, not copied prototype code per `specs/tech-stack.md`): compare `|dx|` vs `|dy|`
-  between box centers to decide vertical vs horizontal routing, exit/enter at the relevant box
-  edge (not center), and use a cubic bezier with control points offset by half the travel
-  distance along the dominant axis.
+- **Fixed top-to-bottom geometry, not axis-dependent.** Unlike the original design source
+  (which picked vertical vs. horizontal routing based on which axis dominated between the two
+  box centers), every connector here always exits the sending box's top-center and enters the
+  receiving box's bottom-center, with a cubic bezier whose control points are offset by half
+  the vertical travel distance — a deliberate deviation from the design source to match the
+  Balanced Scorecard's bottom-up causal-chain convention regardless of the two objectives'
+  relative row/column position.

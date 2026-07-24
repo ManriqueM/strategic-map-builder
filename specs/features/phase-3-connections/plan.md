@@ -24,11 +24,11 @@ structural rework, additive only.
 
 ## 3. Geometry helper
 
-- `src/lib/connectorGeometry.ts`: pure function(s) recreating the design source's `measure()`
-  math — given a container rect and two box rects, return the bezier path `d` string, choosing
-  vertical vs horizontal routing by comparing `|dx|` vs `|dy|` between box centers, exiting at
-  the relevant edge (not center), control points offset by half the travel distance. Keep this
-  pure/testable and separate from DOM measurement/React state.
+- `src/lib/connectorGeometry.ts`: pure function — given a container rect and two box rects,
+  returns the bezier path `d` string. Always exits the sending ("from") box's top-center and
+  enters the receiving ("to") box's bottom-center (fixed rule, not dependent on the two boxes'
+  relative position), with cubic bezier control points offset by half the vertical travel
+  distance. Keep this pure/testable and separate from DOM measurement/React state.
 
 ## 4. Interactive view components
 
@@ -69,6 +69,12 @@ structural rework, additive only.
   matching the design tokens already in `index.css`: `--color-status-attention`-family for
   "hot", a neutral gray for default), and the ring/glow box-shadow values for pending vs
   hot-endpoint objective cards.
+- `.connectors-overlay` needs an explicit `z-index` (e.g. `1`). Objective cards are
+  `position: relative` (for their remove button); without a z-index the SVG overlay and the
+  cards are both positioned elements with `z-index: auto`, so later-DOM-order cards paint over
+  the overlay — invisible/occluded whenever a connector's curve passes behind an intervening
+  card (most visible with top-to-bottom routing between same-row boxes, where the curve dips
+  through the row and can pass behind a card between the two endpoints).
 
 ## 7. Manual validation
 
