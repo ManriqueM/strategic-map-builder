@@ -1,8 +1,10 @@
 import { useMap } from "../state/useMap";
+import { useTranslation } from "../i18n/useTranslation";
 import { EditableText } from "./EditableText";
 
 export function ValuesRow({ readOnly = false }: { readOnly?: boolean }) {
   const { map, dispatch } = useMap();
+  const { t } = useTranslation();
   const { values } = map.sections;
 
   if (!values.visible) return null;
@@ -15,7 +17,7 @@ export function ValuesRow({ readOnly = false }: { readOnly?: boolean }) {
             <EditableText
               value={value.text}
               onChange={(text) => dispatch({ type: "SET_VALUE_TEXT", id: value.id, text })}
-              ariaLabel="Value"
+              ariaLabel={t("canvas.valueAria")}
               placeholder="Value"
               readOnly={readOnly}
             />
@@ -23,7 +25,7 @@ export function ValuesRow({ readOnly = false }: { readOnly?: boolean }) {
               <button
                 type="button"
                 className="remove-value-btn"
-                aria-label={`Remove value: ${value.text}`}
+                aria-label={t("canvas.removeValueAria", { text: value.text })}
                 onClick={() => dispatch({ type: "REMOVE_VALUE", id: value.id })}
               >
                 ×
@@ -37,7 +39,7 @@ export function ValuesRow({ readOnly = false }: { readOnly?: boolean }) {
             className="add-value-tile"
             onClick={() => dispatch({ type: "ADD_VALUE" })}
           >
-            + Add value
+            {t("canvas.addValue")}
           </button>
         )}
       </div>

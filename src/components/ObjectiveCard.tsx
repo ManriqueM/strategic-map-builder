@@ -1,4 +1,5 @@
 import { useMap } from "../state/useMap";
+import { useTranslation } from "../i18n/useTranslation";
 import { EditableText } from "./EditableText";
 import { InitiativeRow } from "./InitiativeRow";
 import { STATUS_META } from "../lib/statusPalette";
@@ -11,6 +12,7 @@ interface ObjectiveCardProps {
 
 export function ObjectiveCard({ perspectiveId, objective }: ObjectiveCardProps) {
   const { dispatch } = useMap();
+  const { t } = useTranslation();
 
   return (
     <div
@@ -20,7 +22,7 @@ export function ObjectiveCard({ perspectiveId, objective }: ObjectiveCardProps) 
       <button
         type="button"
         className="icon-btn remove-objective-btn"
-        aria-label={`Remove objective: ${objective.text}`}
+        aria-label={t("canvas.removeObjectiveAria", { text: objective.text })}
         onClick={() =>
           dispatch({ type: "REMOVE_OBJECTIVE", perspectiveId, objectiveId: objective.id })
         }
@@ -33,7 +35,7 @@ export function ObjectiveCard({ perspectiveId, objective }: ObjectiveCardProps) 
         onChange={(text) =>
           dispatch({ type: "SET_OBJECTIVE_TEXT", perspectiveId, objectiveId: objective.id, text })
         }
-        ariaLabel="Objective"
+        ariaLabel={t("canvas.objectiveAria")}
         placeholder="New objective"
       />
       <div className="initiatives-list">
@@ -52,7 +54,7 @@ export function ObjectiveCard({ perspectiveId, objective }: ObjectiveCardProps) 
             dispatch({ type: "ADD_INITIATIVE", perspectiveId, objectiveId: objective.id })
           }
         >
-          + Add initiative
+          {t("canvas.addInitiative")}
         </button>
       </div>
     </div>

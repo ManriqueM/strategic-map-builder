@@ -9,9 +9,12 @@ import {
   saveMap,
   type SavedMap,
 } from "../lib/storage";
+import { useTranslation } from "../i18n/useTranslation";
 import { EditableText } from "./EditableText";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export function MyMapsScreen({ onOpen }: { onOpen: (savedMap: SavedMap) => void }) {
+  const { t } = useTranslation();
   const [maps, setMaps] = useState<SavedMap[]>(() => listMaps());
   const [renamingId, setRenamingId] = useState<string | null>(null);
   const [confirmingDeleteId, setConfirmingDeleteId] = useState<string | null>(null);
@@ -44,19 +47,22 @@ export function MyMapsScreen({ onOpen }: { onOpen: (savedMap: SavedMap) => void 
     <div className="my-maps-screen">
       <div className="my-maps-header">
         <div>
-          <div className="map-kicker">Strategy Map Builder</div>
-          <h1 className="my-maps-title">My Maps</h1>
+          <div className="map-kicker">{t("myMaps.kicker")}</div>
+          <h1 className="my-maps-title">{t("myMaps.title")}</h1>
         </div>
-        <button type="button" className="add-btn my-maps-new-btn" onClick={handleNew}>
-          + New map
-        </button>
+        <div className="my-maps-header-actions">
+          <LanguageSwitcher />
+          <button type="button" className="add-btn my-maps-new-btn" onClick={handleNew}>
+            {t("myMaps.newMap")}
+          </button>
+        </div>
       </div>
 
       {maps.length === 0 ? (
         <div className="my-maps-empty">
-          <p>No saved maps yet.</p>
+          <p>{t("myMaps.empty")}</p>
           <button type="button" className="add-btn my-maps-new-btn" onClick={handleNew}>
-            + New map
+            {t("myMaps.newMap")}
           </button>
         </div>
       ) : (
@@ -73,7 +79,7 @@ export function MyMapsScreen({ onOpen }: { onOpen: (savedMap: SavedMap) => void 
                     className="my-maps-row-name-edit"
                     value={savedMap.name}
                     onChange={(name) => handleRename(savedMap, name)}
-                    ariaLabel={`Rename ${savedMap.name}`}
+                    ariaLabel={t("myMaps.renameAria", { name: savedMap.name })}
                     autoFocus
                   />
                 </div>
@@ -85,27 +91,31 @@ export function MyMapsScreen({ onOpen }: { onOpen: (savedMap: SavedMap) => void 
                 >
                   <span className="my-maps-row-name">{savedMap.name || "Untitled"}</span>
                   <span className="my-maps-row-date">
-                    Last edited {new Date(savedMap.updatedAt).toLocaleString()}
+                    {t("myMaps.lastEdited", {
+                      date: new Date(savedMap.updatedAt).toLocaleString(),
+                    })}
                   </span>
                 </button>
               )}
 
               {confirmingDeleteId === savedMap.id ? (
                 <div className="my-maps-row-actions">
-                  <span className="builder-toolbar-status">Delete this map?</span>
+                  <span className="builder-toolbar-status">
+                    {t("myMaps.deleteConfirmPrompt")}
+                  </span>
                   <button
                     type="button"
                     className="icon-btn"
                     onClick={() => setConfirmingDeleteId(null)}
                   >
-                    Cancel
+                    {t("myMaps.cancel")}
                   </button>
                   <button
                     type="button"
                     className="icon-btn my-maps-delete-confirm"
                     onClick={() => handleDelete(savedMap.id)}
                   >
-                    Delete
+                    {t("myMaps.delete")}
                   </button>
                 </div>
               ) : (
@@ -113,26 +123,26 @@ export function MyMapsScreen({ onOpen }: { onOpen: (savedMap: SavedMap) => void 
                   <button
                     type="button"
                     className="icon-btn"
-                    aria-label={`Rename ${savedMap.name}`}
+                    aria-label={t("myMaps.renameAria", { name: savedMap.name })}
                     onClick={() => setRenamingId(savedMap.id)}
                   >
-                    Rename
+                    {t("myMaps.rename")}
                   </button>
                   <button
                     type="button"
                     className="icon-btn"
-                    aria-label={`Duplicate ${savedMap.name}`}
+                    aria-label={t("myMaps.duplicateAria", { name: savedMap.name })}
                     onClick={() => handleDuplicate(savedMap)}
                   >
-                    Duplicate
+                    {t("myMaps.duplicate")}
                   </button>
                   <button
                     type="button"
                     className="icon-btn"
-                    aria-label={`Delete ${savedMap.name}`}
+                    aria-label={t("myMaps.deleteAria", { name: savedMap.name })}
                     onClick={() => setConfirmingDeleteId(savedMap.id)}
                   >
-                    Delete
+                    {t("myMaps.delete")}
                   </button>
                 </div>
               )}

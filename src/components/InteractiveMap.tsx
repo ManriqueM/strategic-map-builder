@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { useMap } from "../state/useMap";
+import { useTranslation } from "../i18n/useTranslation";
 import { useConnectorPaths } from "../state/useConnectorPaths";
 import { nextStatus } from "../lib/statusPalette";
 import { VisionMissionBanner } from "./VisionMissionBanner";
@@ -10,6 +11,7 @@ import { StatusLegend } from "./StatusLegend";
 
 export function InteractiveMap({ mode }: { mode: "connect" | "status" }) {
   const { map, dispatch } = useMap();
+  const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const boxEls = useRef<Map<string, HTMLElement>>(new Map());
   const boxRefCallbacks = useRef<Map<string, (el: HTMLElement | null) => void>>(new Map());
@@ -55,15 +57,13 @@ export function InteractiveMap({ mode }: { mode: "connect" | "status" }) {
 
   return (
     <div className="interactive-canvas">
-      <div className="map-kicker">Strategy Map</div>
+      <div className="map-kicker">{t("canvas.kicker")}</div>
       <h1 className="map-title">{map.title || "Untitled Strategy Map"}</h1>
       {map.subtitle && <p className="map-subtitle">{map.subtitle}</p>}
       <VisionMissionBanner readOnly />
       <ValuesRow readOnly />
       <p className="interactive-hint">
-        {mode === "status"
-          ? "Click an objective to cycle its status: On Track → Needs Attention → Off Track → No status."
-          : "Click an objective, then click another to connect them. Click a connection to remove it."}
+        {mode === "status" ? t("interactive.statusHint") : t("interactive.connectHint")}
       </p>
       <div ref={containerRef} className="interactive-rows">
         <ConnectorsOverlay

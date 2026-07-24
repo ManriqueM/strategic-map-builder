@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useTranslation } from "../i18n/useTranslation";
 import { EditableText } from "./EditableText";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export type BuilderMode = "edit" | "connect" | "status";
 
@@ -20,6 +22,7 @@ export function BuilderToolbar({
   onRename: (name: string) => void;
   onBack: () => void;
 }) {
+  const { t } = useTranslation();
   const [confirmingLeave, setConfirmingLeave] = useState(false);
 
   const handleBackClick = () => {
@@ -33,18 +36,16 @@ export function BuilderToolbar({
   if (confirmingLeave) {
     return (
       <div className="builder-toolbar builder-toolbar-confirm">
-        <span className="builder-toolbar-status">
-          You have unsaved changes — leave without saving?
-        </span>
+        <span className="builder-toolbar-status">{t("builder.leaveConfirm")}</span>
         <button
           type="button"
           className="icon-btn"
           onClick={() => setConfirmingLeave(false)}
         >
-          Keep editing
+          {t("builder.keepEditing")}
         </button>
         <button type="button" className="add-btn builder-toolbar-save" onClick={onBack}>
-          Discard &amp; leave
+          {t("builder.discardAndLeave")}
         </button>
       </div>
     );
@@ -53,47 +54,50 @@ export function BuilderToolbar({
   return (
     <div className="builder-toolbar">
       <button type="button" className="icon-btn builder-toolbar-back" onClick={handleBackClick}>
-        ← My Maps
+        {t("builder.back")}
       </button>
       <EditableText
         as="span"
         className="builder-toolbar-name"
         value={name}
         onChange={onRename}
-        ariaLabel="Map name"
+        ariaLabel={t("builder.mapNameAria")}
         placeholder="Untitled"
       />
-      <div className="mode-toggle" role="group" aria-label="View mode">
+      <div className="mode-toggle" role="group" aria-label={t("builder.viewModeAria")}>
         <button
           type="button"
           className={`mode-toggle-btn${mode === "edit" ? " is-active" : ""}`}
           onClick={() => onModeChange("edit")}
         >
-          Edit
+          {t("builder.modeEdit")}
         </button>
         <button
           type="button"
           className={`mode-toggle-btn${mode === "connect" ? " is-active" : ""}`}
           onClick={() => onModeChange("connect")}
         >
-          Connect
+          {t("builder.modeConnect")}
         </button>
         <button
           type="button"
           className={`mode-toggle-btn${mode === "status" ? " is-active" : ""}`}
           onClick={() => onModeChange("status")}
         >
-          Status
+          {t("builder.modeStatus")}
         </button>
       </div>
-      <span className="builder-toolbar-status">{dirty ? "Unsaved changes" : "Saved"}</span>
+      <span className="builder-toolbar-status">
+        {dirty ? t("builder.unsavedChanges") : t("builder.saved")}
+      </span>
+      <LanguageSwitcher />
       <button
         type="button"
         className="add-btn builder-toolbar-save"
         onClick={onSave}
         disabled={!dirty}
       >
-        Save
+        {t("builder.save")}
       </button>
     </div>
   );

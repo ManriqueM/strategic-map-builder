@@ -1,19 +1,21 @@
 import { useMap } from "../state/useMap";
+import { useTranslation } from "../i18n/useTranslation";
 
 export function SectionsPanel() {
   const { map, dispatch } = useMap();
+  const { t } = useTranslation();
 
   return (
     <aside className="sections-panel">
       <div className="panel-section">
-        <h2>Sections</h2>
+        <h2>{t("sections.heading")}</h2>
         <label className="toggle-row">
           <input
             type="checkbox"
             checked={map.sections.mission.visible}
             onChange={() => dispatch({ type: "TOGGLE_SECTION", section: "mission" })}
           />
-          Mission
+          {t("sections.mission")}
         </label>
         <label className="toggle-row">
           <input
@@ -21,7 +23,7 @@ export function SectionsPanel() {
             checked={map.sections.vision.visible}
             onChange={() => dispatch({ type: "TOGGLE_SECTION", section: "vision" })}
           />
-          Vision
+          {t("sections.vision")}
         </label>
         <label className="toggle-row">
           <input
@@ -29,12 +31,12 @@ export function SectionsPanel() {
             checked={map.sections.values.visible}
             onChange={() => dispatch({ type: "TOGGLE_SECTION", section: "values" })}
           />
-          Values
+          {t("sections.values")}
         </label>
       </div>
 
       <div className="panel-section">
-        <h2>Perspectives</h2>
+        <h2>{t("sections.perspectivesHeading")}</h2>
         {map.perspectives.map((perspective, index) => (
           <div key={perspective.id} className="perspective-row-control">
             <label className="toggle-row">
@@ -48,7 +50,7 @@ export function SectionsPanel() {
             <button
               type="button"
               className="icon-btn"
-              aria-label={`Move ${perspective.name} up`}
+              aria-label={t("sections.moveUpAria", { name: perspective.name })}
               disabled={index === 0}
               onClick={() =>
                 dispatch({ type: "MOVE_PERSPECTIVE", id: perspective.id, direction: "up" })
@@ -59,7 +61,7 @@ export function SectionsPanel() {
             <button
               type="button"
               className="icon-btn"
-              aria-label={`Move ${perspective.name} down`}
+              aria-label={t("sections.moveDownAria", { name: perspective.name })}
               disabled={index === map.perspectives.length - 1}
               onClick={() =>
                 dispatch({ type: "MOVE_PERSPECTIVE", id: perspective.id, direction: "down" })
@@ -70,7 +72,7 @@ export function SectionsPanel() {
             <button
               type="button"
               className="icon-btn"
-              aria-label={`Remove perspective: ${perspective.name}`}
+              aria-label={t("sections.removePerspectiveAria", { name: perspective.name })}
               onClick={() => dispatch({ type: "REMOVE_PERSPECTIVE", id: perspective.id })}
             >
               ×
@@ -82,7 +84,7 @@ export function SectionsPanel() {
           className="add-btn"
           onClick={() => dispatch({ type: "ADD_PERSPECTIVE" })}
         >
-          + Add perspective
+          {t("sections.addPerspective")}
         </button>
       </div>
     </aside>

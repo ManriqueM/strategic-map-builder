@@ -1,4 +1,5 @@
 import { useMap } from "../state/useMap";
+import { useTranslation } from "../i18n/useTranslation";
 import { EditableText } from "./EditableText";
 import type { Initiative } from "../types";
 
@@ -10,6 +11,7 @@ interface InitiativeRowProps {
 
 export function InitiativeRow({ perspectiveId, objectiveId, initiative }: InitiativeRowProps) {
   const { dispatch } = useMap();
+  const { t } = useTranslation();
 
   return (
     <div className="initiative-row">
@@ -27,13 +29,13 @@ export function InitiativeRow({ perspectiveId, objectiveId, initiative }: Initia
             text,
           })
         }
-        ariaLabel="Initiative"
+        ariaLabel={t("canvas.initiativeAria")}
         placeholder="New initiative"
       />
       <button
         type="button"
         className="icon-btn"
-        aria-label={`Remove initiative: ${initiative.text}`}
+        aria-label={t("canvas.removeInitiativeAria", { text: initiative.text })}
         onClick={() =>
           dispatch({
             type: "REMOVE_INITIATIVE",

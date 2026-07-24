@@ -1,4 +1,5 @@
 import { useMap } from "../state/useMap";
+import { useTranslation } from "../i18n/useTranslation";
 import { EditableText } from "./EditableText";
 import { ObjectiveCard } from "./ObjectiveCard";
 import { perspectiveColor } from "../lib/perspectivePalette";
@@ -11,6 +12,7 @@ interface PerspectiveRowProps {
 
 export function PerspectiveRow({ perspective, number }: PerspectiveRowProps) {
   const { dispatch } = useMap();
+  const { t } = useTranslation();
   const label = String(number).padStart(2, "0");
 
   return (
@@ -24,7 +26,7 @@ export function PerspectiveRow({ perspective, number }: PerspectiveRowProps) {
           className="perspective-name"
           value={perspective.name}
           onChange={(name) => dispatch({ type: "RENAME_PERSPECTIVE", id: perspective.id, name })}
-          ariaLabel="Perspective name"
+          ariaLabel={t("canvas.perspectiveNameAria")}
           placeholder="New Perspective"
         />
         <div className="perspective-divider" />
@@ -42,7 +44,7 @@ export function PerspectiveRow({ perspective, number }: PerspectiveRowProps) {
           className="add-objective-card"
           onClick={() => dispatch({ type: "ADD_OBJECTIVE", perspectiveId: perspective.id })}
         >
-          + Add objective
+          {t("canvas.addObjective")}
         </button>
       </div>
     </div>
