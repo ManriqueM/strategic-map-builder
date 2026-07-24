@@ -3,7 +3,7 @@
 Design-first, incremental: build the visual builder against the chosen design first, then
 layer in persistence, then the interactive/populate behaviors.
 
-- [ ] **Phase 1 — Builder UI**: Static strategy map builder matching the 2a design. Default
+- [x] **Phase 1 — Builder UI**: Static strategy map builder matching the 2a design. Default
       sections (Mission, Vision, Values, and the 4 perspectives: Financial, Customer,
       Internal Process, Learning & Growth) shown by default; user can toggle which sections
       are visible and edit their content (objectives, initiatives). Perspectives are not
