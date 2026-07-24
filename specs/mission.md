@@ -3,10 +3,15 @@
 ## Why
 
 Organizations that use the Balanced Scorecard framework need a way to turn their mission,
-vision, values, and four strategic perspectives (Financial, Customer, Internal Process,
-Learning & Growth) into a visual strategy map — then keep it alive: track which objectives
-are on track, see how initiatives connect across perspectives, and update status over time.
-Today this typically lives in static slides or spreadsheets that go stale immediately.
+vision, values, and strategic perspectives into a visual strategy map — then keep it alive:
+track which objectives are on track, see how initiatives connect across perspectives, and
+update status over time. Today this typically lives in static slides or spreadsheets that go
+stale immediately.
+
+The four classic Balanced Scorecard perspectives (Financial, Customer, Internal Process,
+Learning & Growth) are offered as the **default** starting point, not a fixed structure —
+users can rename, add, remove, or reorder perspectives to fit how their organization actually
+thinks about strategy (e.g. a nonprofit might swap "Financial" for "Impact").
 
 This project is a strategy map builder and viewer: a tool to construct a strategy map from a
 flexible set of sections, save it, then interact with it — drawing connections between
