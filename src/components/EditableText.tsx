@@ -9,6 +9,7 @@ interface EditableTextProps {
   placeholder?: string;
   ariaLabel?: string;
   multiline?: boolean;
+  autoFocus?: boolean;
 }
 
 export function EditableText({
@@ -20,6 +21,7 @@ export function EditableText({
   placeholder,
   ariaLabel,
   multiline = false,
+  autoFocus = false,
 }: EditableTextProps) {
   const ref = useRef<HTMLElement | null>(null);
 
@@ -28,6 +30,17 @@ export function EditableText({
       ref.current.textContent = value;
     }
   }, [value]);
+
+  useEffect(() => {
+    if (!autoFocus || !ref.current) return;
+    ref.current.focus();
+    const range = document.createRange();
+    range.selectNodeContents(ref.current);
+    const selection = window.getSelection();
+    selection?.removeAllRanges();
+    selection?.addRange(range);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleBlur = () => {
     const text = ref.current?.textContent?.trim() ?? "";

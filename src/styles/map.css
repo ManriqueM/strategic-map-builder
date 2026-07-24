@@ -1,3 +1,186 @@
+/* ---- Builder shell / toolbar ---- */
+.builder-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.builder-shell .app-shell {
+  min-height: 0;
+  flex: 1;
+}
+
+.builder-shell .sections-panel {
+  height: calc(100vh - 53px);
+  top: 53px;
+}
+
+.builder-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 24px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.builder-toolbar-back {
+  font-weight: 600;
+}
+
+.builder-toolbar-name {
+  border: none;
+  background: transparent;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+}
+.builder-toolbar-name:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.builder-toolbar-status {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-right: auto;
+}
+
+.builder-toolbar-confirm .builder-toolbar-status {
+  margin-right: 0;
+  color: var(--color-status-attention);
+  font-weight: 600;
+}
+
+.add-btn.builder-toolbar-save {
+  width: auto;
+  margin-top: 0;
+  padding: 8px 18px;
+}
+.add-btn.builder-toolbar-save:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ---- My Maps screen ---- */
+.my-maps-screen {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 32px 80px;
+}
+
+.my-maps-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.my-maps-title {
+  font-family: var(--font-ui);
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.add-btn.my-maps-new-btn {
+  width: auto;
+  margin-top: 0;
+  padding: 10px 18px;
+}
+
+.my-maps-empty {
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--color-text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.my-maps-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.my-maps-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 6px 10px 6px 20px;
+}
+
+.my-maps-row-open {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 12px 0;
+  text-align: left;
+}
+
+.my-maps-row-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.my-maps-row-date {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.my-maps-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+  padding-right: 10px;
+}
+
+.my-maps-row-rename {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 0;
+}
+
+.my-maps-row-name-edit {
+  font-size: 15px;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.my-maps-delete-confirm {
+  color: var(--color-status-off-track);
+}
+.my-maps-delete-confirm:hover {
+  background: var(--color-status-off-track-tint);
+  color: var(--color-status-off-track);
+}
+
 /* ---- App shell ---- */
 .app-shell {
   display: flex;

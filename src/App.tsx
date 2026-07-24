@@ -1,25 +1,23 @@
+import { useState } from "react";
 import "./styles/map.css";
-import { MapProvider } from "./state/MapContext";
-import { SectionsPanel } from "./components/SectionsPanel";
-import { Header } from "./components/Header";
-import { VisionMissionBanner } from "./components/VisionMissionBanner";
-import { ValuesRow } from "./components/ValuesRow";
-import { PerspectivesSection } from "./components/PerspectivesSection";
+import { MyMapsScreen } from "./components/MyMapsScreen";
+import { BuilderScreen } from "./components/BuilderScreen";
+import type { SavedMap } from "./lib/storage";
 
 function App() {
-  return (
-    <MapProvider>
-      <div className="app-shell">
-        <SectionsPanel />
-        <main className="map-canvas">
-          <Header />
-          <VisionMissionBanner />
-          <ValuesRow />
-          <PerspectivesSection />
-        </main>
-      </div>
-    </MapProvider>
-  );
+  const [activeMap, setActiveMap] = useState<SavedMap | null>(null);
+
+  if (activeMap) {
+    return (
+      <BuilderScreen
+        savedMap={activeMap}
+        onBack={() => setActiveMap(null)}
+        onSaved={setActiveMap}
+      />
+    );
+  }
+
+  return <MyMapsScreen onOpen={setActiveMap} />;
 }
 
 export default App;
