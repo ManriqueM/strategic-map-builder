@@ -1,9 +1,27 @@
+# Python (mm-start scaffold; unused by this JS/TS app but left for consistency)
 .venv/
 __pycache__/
 *.pyc
 *.pyo
 .env
+
+# Node / Vite
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor / OS
 .DS_Store
-dist/
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Misc build output
 build/
 *.egg-info/
