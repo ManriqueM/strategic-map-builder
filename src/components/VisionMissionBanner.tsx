@@ -1,7 +1,7 @@
 import { useMap } from "../state/useMap";
 import { EditableText } from "./EditableText";
 
-export function VisionMissionBanner() {
+export function VisionMissionBanner({ readOnly = false }: { readOnly?: boolean }) {
   const { map, dispatch } = useMap();
   const { vision, mission } = map.sections;
 
@@ -18,6 +18,7 @@ export function VisionMissionBanner() {
             onChange={(text) => dispatch({ type: "SET_VISION_TEXT", text })}
             ariaLabel="Vision statement"
             placeholder="Add your vision statement here."
+            readOnly={readOnly}
           />
         </div>
       )}
@@ -30,6 +31,7 @@ export function VisionMissionBanner() {
             onChange={(text) => dispatch({ type: "SET_MISSION_TEXT", text })}
             ariaLabel="Mission statement"
             placeholder="Add your mission statement here."
+            readOnly={readOnly}
           />
         </div>
       )}

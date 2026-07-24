@@ -4,12 +4,16 @@ import { EditableText } from "./EditableText";
 export function BuilderToolbar({
   name,
   dirty,
+  mode,
+  onModeChange,
   onSave,
   onRename,
   onBack,
 }: {
   name: string;
   dirty: boolean;
+  mode: "edit" | "connect";
+  onModeChange: (mode: "edit" | "connect") => void;
   onSave: () => void;
   onRename: (name: string) => void;
   onBack: () => void;
@@ -57,6 +61,22 @@ export function BuilderToolbar({
         ariaLabel="Map name"
         placeholder="Untitled"
       />
+      <div className="mode-toggle" role="group" aria-label="View mode">
+        <button
+          type="button"
+          className={`mode-toggle-btn${mode === "edit" ? " is-active" : ""}`}
+          onClick={() => onModeChange("edit")}
+        >
+          Edit
+        </button>
+        <button
+          type="button"
+          className={`mode-toggle-btn${mode === "connect" ? " is-active" : ""}`}
+          onClick={() => onModeChange("connect")}
+        >
+          Connect
+        </button>
+      </div>
       <span className="builder-toolbar-status">{dirty ? "Unsaved changes" : "Saved"}</span>
       <button
         type="button"

@@ -46,6 +46,29 @@
   background: rgba(0, 0, 0, 0.04);
 }
 
+.mode-toggle {
+  display: flex;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 2px;
+}
+
+.mode-toggle-btn {
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 5px 14px;
+  border-radius: 3px;
+}
+.mode-toggle-btn.is-active {
+  background: var(--color-navy-700);
+  color: var(--color-navy-ink);
+}
+
 .builder-toolbar-status {
   font-size: 12px;
   color: var(--color-text-muted);
@@ -564,4 +587,67 @@
 .add-objective-card:hover {
   border-color: var(--color-navy-700);
   color: var(--color-navy-700);
+}
+
+/* ---- Interactive view (connections) ---- */
+.interactive-canvas {
+  flex: 1;
+  padding: 52px 60px 80px;
+  max-width: 1600px;
+}
+
+.interactive-hint {
+  font-size: 12.5px;
+  color: var(--color-text-muted);
+  margin: 0 0 24px;
+}
+
+.interactive-rows {
+  position: relative;
+}
+
+.connectors-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.connector-hit {
+  stroke: transparent;
+  stroke-width: 14;
+  fill: none;
+  pointer-events: stroke;
+  cursor: pointer;
+}
+
+.connector-line {
+  stroke: var(--color-connector);
+  stroke-width: 1.5;
+  fill: none;
+  pointer-events: none;
+}
+
+.connector-line-hot {
+  stroke: var(--color-connector-hot);
+  stroke-width: 2.5;
+}
+
+.interactive-objective-card {
+  cursor: pointer;
+  user-select: none;
+}
+
+.interactive-objective-card.is-pending {
+  box-shadow:
+    0 0 0 3px rgba(34, 48, 63, 0.35),
+    var(--shadow-card);
+}
+
+.interactive-objective-card.is-hot {
+  box-shadow:
+    0 0 0 3px rgba(179, 80, 63, 0.35),
+    var(--shadow-card);
 }

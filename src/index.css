@@ -31,6 +31,10 @@
   --color-status-off-track-tint: #f7e9e6;
   --color-status-neutral: #d8d3c9;
 
+  /* Connectors (interactive view) */
+  --color-connector: #9aa5b3;
+  --color-connector-hot: #b3503f;
+
   /* Radii / shadows */
   --radius-sm: 4px;
   --radius-md: 8px;

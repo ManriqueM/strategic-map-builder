@@ -10,6 +10,7 @@ interface EditableTextProps {
   ariaLabel?: string;
   multiline?: boolean;
   autoFocus?: boolean;
+  readOnly?: boolean;
 }
 
 export function EditableText({
@@ -22,6 +23,7 @@ export function EditableText({
   ariaLabel,
   multiline = false,
   autoFocus = false,
+  readOnly = false,
 }: EditableTextProps) {
   const ref = useRef<HTMLElement | null>(null);
 
@@ -57,6 +59,14 @@ export function EditableText({
       ref.current?.blur();
     }
   };
+
+  if (readOnly) {
+    return (
+      <Tag className={className} style={style} aria-label={ariaLabel}>
+        {value || placeholder}
+      </Tag>
+    );
+  }
 
   return (
     <Tag

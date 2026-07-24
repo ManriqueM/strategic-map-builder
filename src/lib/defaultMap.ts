@@ -45,5 +45,6 @@ export function createDefaultMap(): StrategyMap {
       makePerspective("Internal Process", ["New objective", "New objective"]),
       makePerspective("Learning & Growth", ["New objective", "New objective"]),
     ],
+    connections: [],
   };
 }

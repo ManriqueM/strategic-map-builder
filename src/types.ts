@@ -22,9 +22,16 @@ export interface Sections {
   values: { visible: boolean; items: { id: string; text: string }[] };
 }
 
+export interface Connection {
+  id: string;
+  from: string;
+  to: string;
+}
+
 export interface StrategyMap {
   title: string;
   subtitle: string;
   sections: Sections;
   perspectives: Perspective[];
+  connections: Connection[];
 }

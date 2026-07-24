@@ -38,13 +38,21 @@ function writeEnvelope(envelope: Envelope): void {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(envelope));
 }
 
+function normalizeMap(saved: SavedMap): SavedMap {
+  if (saved.map.connections) return saved;
+  return { ...saved, map: { ...saved.map, connections: [] } };
+}
+
 export function listMaps(): SavedMap[] {
   const envelope = readEnvelope();
-  return Object.values(envelope.maps).sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+  return Object.values(envelope.maps)
+    .map(normalizeMap)
+    .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
 }
 
 export function getMap(id: string): SavedMap | undefined {
-  return readEnvelope().maps[id];
+  const saved = readEnvelope().maps[id];
+  return saved && normalizeMap(saved);
 }
 
 export function saveMap(id: string, name: string, map: StrategyMap): SavedMap {
@@ -83,7 +91,7 @@ export function duplicateMap(id: string, newId: string, newName: string): SavedM
     name: newName,
     createdAt: now,
     updatedAt: now,
-    map: existing.map,
+    map: normalizeMap(existing).map,
   };
   envelope.maps[newId] = duplicate;
   writeEnvelope(envelope);

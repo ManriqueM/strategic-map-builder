@@ -31,7 +31,9 @@ export type MapAction =
       objectiveId: string;
       initiativeId: string;
       text: string;
-    };
+    }
+  | { type: "ADD_CONNECTION"; from: string; to: string }
+  | { type: "REMOVE_CONNECTION"; id: string };
 
 export function mapReducer(state: StrategyMap, action: MapAction): StrategyMap {
   switch (action.type) {
@@ -265,6 +267,25 @@ export function mapReducer(state: StrategyMap, action: MapAction): StrategyMap {
               }
             : p,
         ),
+      };
+
+    case "ADD_CONNECTION": {
+      const { from, to } = action;
+      if (from === to) return state;
+      const exists = state.connections.some(
+        (c) => (c.from === from && c.to === to) || (c.from === to && c.to === from),
+      );
+      if (exists) return state;
+      return {
+        ...state,
+        connections: [...state.connections, { id: makeId("conn"), from, to }],
+      };
+    }
+
+    case "REMOVE_CONNECTION":
+      return {
+        ...state,
+        connections: state.connections.filter((c) => c.id !== action.id),
       };
 
     default:
