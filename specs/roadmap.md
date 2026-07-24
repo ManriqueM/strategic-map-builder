@@ -10,7 +10,7 @@ layer in persistence, then the interactive/populate behaviors.
       fixed to the 4 defaults — user can rename, add, remove, and reorder them.
 - [x] **Phase 2 — Save/Load**: Persist a built map to `localStorage` and load it back;
       basic list of saved maps.
-- [ ] **Phase 3 — Interactive view: connections**: Switch a saved map into an interactive
+- [x] **Phase 3 — Interactive view: connections**: Switch a saved map into an interactive
       view where objective boxes can be connected to each other (click node A, click node B),
       rendered as SVG bezier curves with hover-highlight and click-to-remove, matching the
       design's connector behavior.
