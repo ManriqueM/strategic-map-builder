@@ -17,6 +17,6 @@ layer in persistence, then the interactive/populate behaviors.
 - [x] **Phase 4 — Interactive view: status**: Assign on-track / needs-attention / off-track
       status and see it reflected as color coding on the map (colored top border on objective
       cards, status legend), matching the design's status palette.
-- [ ] **Phase 5 — Language selection**: Add i18n support and a language switcher for the app
+- [x] **Phase 5 — Language selection**: Add i18n support and a language switcher for the app
       UI (e.g. English/Spanish to start), so the tool itself — not just map content — can be
       used in the user's preferred language.
