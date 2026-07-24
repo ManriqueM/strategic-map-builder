@@ -623,6 +623,10 @@
   cursor: pointer;
 }
 
+.connector-hit-inert {
+  cursor: default;
+}
+
 .connector-line {
   stroke: var(--color-connector);
   stroke-width: 1.5;
@@ -650,4 +654,44 @@
   box-shadow:
     0 0 0 3px rgba(179, 80, 63, 0.35),
     var(--shadow-card);
+}
+
+.interactive-objective-card.status-mode-card:hover {
+  background: var(--color-bg);
+}
+
+.status-legend {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-top: 40px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border);
+}
+
+.status-legend-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.status-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-legend-swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.status-legend-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
 }

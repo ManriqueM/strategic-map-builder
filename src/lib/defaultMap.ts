@@ -9,6 +9,7 @@ function makeObjective(text: string, initiativeTexts: string[]): Objective {
   return {
     id: makeId("obj"),
     text,
+    status: "none",
     initiatives: initiativeTexts.map(makeInitiative),
   };
 }

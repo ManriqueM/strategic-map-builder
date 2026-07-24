@@ -5,11 +5,13 @@ export function ConnectorsOverlay({
   hoveredConnectionId,
   onHover,
   onRemove,
+  interactive,
 }: {
   paths: ConnectorPathData[];
   hoveredConnectionId: string | null;
   onHover: (id: string | null) => void;
   onRemove: (id: string) => void;
+  interactive: boolean;
 }) {
   return (
     <svg className="connectors-overlay">
@@ -41,10 +43,10 @@ export function ConnectorsOverlay({
           <g key={p.id}>
             <path
               d={p.d}
-              className="connector-hit"
+              className={`connector-hit${interactive ? "" : " connector-hit-inert"}`}
               onMouseEnter={() => onHover(p.id)}
               onMouseLeave={() => onHover(null)}
-              onClick={() => onRemove(p.id)}
+              onClick={interactive ? () => onRemove(p.id) : undefined}
             />
             <path
               d={p.d}

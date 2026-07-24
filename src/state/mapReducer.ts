@@ -1,5 +1,5 @@
 import { makeId } from "../lib/id";
-import type { StrategyMap } from "../types";
+import type { ObjectiveStatus, StrategyMap } from "../types";
 
 export type MapAction =
   | { type: "SET_TITLE"; text: string }
@@ -18,6 +18,12 @@ export type MapAction =
   | { type: "ADD_OBJECTIVE"; perspectiveId: string }
   | { type: "REMOVE_OBJECTIVE"; perspectiveId: string; objectiveId: string }
   | { type: "SET_OBJECTIVE_TEXT"; perspectiveId: string; objectiveId: string; text: string }
+  | {
+      type: "SET_OBJECTIVE_STATUS";
+      perspectiveId: string;
+      objectiveId: string;
+      status: ObjectiveStatus;
+    }
   | { type: "ADD_INITIATIVE"; perspectiveId: string; objectiveId: string }
   | {
       type: "REMOVE_INITIATIVE";
@@ -170,7 +176,7 @@ export function mapReducer(state: StrategyMap, action: MapAction): StrategyMap {
                 ...p,
                 objectives: [
                   ...p.objectives,
-                  { id: makeId("obj"), text: "New objective", initiatives: [] },
+                  { id: makeId("obj"), text: "New objective", status: "none", initiatives: [] },
                 ],
               }
             : p,
@@ -196,6 +202,21 @@ export function mapReducer(state: StrategyMap, action: MapAction): StrategyMap {
                 ...p,
                 objectives: p.objectives.map((o) =>
                   o.id === action.objectiveId ? { ...o, text: action.text } : o,
+                ),
+              }
+            : p,
+        ),
+      };
+
+    case "SET_OBJECTIVE_STATUS":
+      return {
+        ...state,
+        perspectives: state.perspectives.map((p) =>
+          p.id === action.perspectiveId
+            ? {
+                ...p,
+                objectives: p.objectives.map((o) =>
+                  o.id === action.objectiveId ? { ...o, status: action.status } : o,
                 ),
               }
             : p,

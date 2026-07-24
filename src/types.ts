@@ -3,9 +3,12 @@ export interface Initiative {
   text: string;
 }
 
+export type ObjectiveStatus = "none" | "on-track" | "needs-attention" | "off-track";
+
 export interface Objective {
   id: string;
   text: string;
+  status: ObjectiveStatus;
   initiatives: Initiative[];
 }
 

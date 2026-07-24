@@ -1,15 +1,18 @@
+import { STATUS_META } from "../lib/statusPalette";
 import type { Objective } from "../types";
 import type { ConnectorPathData } from "../state/useConnectorPaths";
 
 export function InteractiveObjectiveCard({
   objective,
   boxRef,
+  mode,
   isPending,
   hoveredConnection,
   onClick,
 }: {
   objective: Objective;
   boxRef: (el: HTMLElement | null) => void;
+  mode: "connect" | "status";
   isPending: boolean;
   hoveredConnection: ConnectorPathData | null;
   onClick: () => void;
@@ -18,12 +21,20 @@ export function InteractiveObjectiveCard({
     !!hoveredConnection &&
     (hoveredConnection.from === objective.id || hoveredConnection.to === objective.id);
 
-  const stateClass = isPending ? " is-pending" : isHotEndpoint ? " is-hot" : "";
+  const stateClass =
+    mode === "connect"
+      ? isPending
+        ? " is-pending"
+        : isHotEndpoint
+          ? " is-hot"
+          : ""
+      : " status-mode-card";
 
   return (
     <div
       ref={boxRef}
       className={`objective-card interactive-objective-card${stateClass}`}
+      style={{ borderTopColor: STATUS_META[objective.status].color }}
       onClick={onClick}
     >
       <div className="objective-text">{objective.text || "New objective"}</div>

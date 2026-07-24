@@ -39,8 +39,22 @@ function writeEnvelope(envelope: Envelope): void {
 }
 
 function normalizeMap(saved: SavedMap): SavedMap {
-  if (saved.map.connections) return saved;
-  return { ...saved, map: { ...saved.map, connections: [] } };
+  const needsConnections = !saved.map.connections;
+  const needsStatus = saved.map.perspectives.some((p) =>
+    p.objectives.some((o) => !o.status),
+  );
+  if (!needsConnections && !needsStatus) return saved;
+  return {
+    ...saved,
+    map: {
+      ...saved.map,
+      connections: saved.map.connections ?? [],
+      perspectives: saved.map.perspectives.map((p) => ({
+        ...p,
+        objectives: p.objectives.map((o) => ({ ...o, status: o.status ?? "none" })),
+      })),
+    },
+  };
 }
 
 export function listMaps(): SavedMap[] {

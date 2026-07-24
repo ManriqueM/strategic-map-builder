@@ -7,7 +7,7 @@ import { Header } from "./Header";
 import { VisionMissionBanner } from "./VisionMissionBanner";
 import { ValuesRow } from "./ValuesRow";
 import { PerspectivesSection } from "./PerspectivesSection";
-import { BuilderToolbar } from "./BuilderToolbar";
+import { BuilderToolbar, type BuilderMode } from "./BuilderToolbar";
 import { InteractiveMap } from "./InteractiveMap";
 
 function BuilderInner({
@@ -22,7 +22,7 @@ function BuilderInner({
   const { map } = useMap();
   const [name, setName] = useState(savedMap.name);
   const [dirty, setDirty] = useState(false);
-  const [mode, setMode] = useState<"edit" | "connect">("edit");
+  const [mode, setMode] = useState<BuilderMode>("edit");
   const lastSavedMapRef = useRef(map);
 
   useEffect(() => {
@@ -55,8 +55,8 @@ function BuilderInner({
         onRename={handleRename}
         onBack={onBack}
       />
-      {mode === "connect" ? (
-        <InteractiveMap />
+      {mode === "connect" || mode === "status" ? (
+        <InteractiveMap mode={mode} />
       ) : (
         <div className="app-shell">
           <SectionsPanel />

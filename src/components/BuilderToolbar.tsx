@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { EditableText } from "./EditableText";
 
+export type BuilderMode = "edit" | "connect" | "status";
+
 export function BuilderToolbar({
   name,
   dirty,
@@ -12,8 +14,8 @@ export function BuilderToolbar({
 }: {
   name: string;
   dirty: boolean;
-  mode: "edit" | "connect";
-  onModeChange: (mode: "edit" | "connect") => void;
+  mode: BuilderMode;
+  onModeChange: (mode: BuilderMode) => void;
   onSave: () => void;
   onRename: (name: string) => void;
   onBack: () => void;
@@ -75,6 +77,13 @@ export function BuilderToolbar({
           onClick={() => onModeChange("connect")}
         >
           Connect
+        </button>
+        <button
+          type="button"
+          className={`mode-toggle-btn${mode === "status" ? " is-active" : ""}`}
+          onClick={() => onModeChange("status")}
+        >
+          Status
         </button>
       </div>
       <span className="builder-toolbar-status">{dirty ? "Unsaved changes" : "Saved"}</span>

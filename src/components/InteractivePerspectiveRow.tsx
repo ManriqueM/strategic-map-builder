@@ -6,6 +6,7 @@ import type { ConnectorPathData } from "../state/useConnectorPaths";
 export function InteractivePerspectiveRow({
   perspective,
   number,
+  mode,
   pendingId,
   hoveredConnection,
   onBoxClick,
@@ -13,9 +14,10 @@ export function InteractivePerspectiveRow({
 }: {
   perspective: Perspective;
   number: number;
+  mode: "connect" | "status";
   pendingId: string | null;
   hoveredConnection: ConnectorPathData | null;
-  onBoxClick: (id: string) => void;
+  onBoxClick: (perspectiveId: string, objectiveId: string) => void;
   getBoxRef: (id: string) => (el: HTMLElement | null) => void;
 }) {
   const label = String(number).padStart(2, "0");
@@ -35,9 +37,10 @@ export function InteractivePerspectiveRow({
             key={objective.id}
             objective={objective}
             boxRef={getBoxRef(objective.id)}
+            mode={mode}
             isPending={pendingId === objective.id}
             hoveredConnection={hoveredConnection}
-            onClick={() => onBoxClick(objective.id)}
+            onClick={() => onBoxClick(perspective.id, objective.id)}
           />
         ))}
       </div>

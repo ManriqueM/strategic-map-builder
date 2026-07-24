@@ -1,6 +1,7 @@
 import { useMap } from "../state/useMap";
 import { EditableText } from "./EditableText";
 import { InitiativeRow } from "./InitiativeRow";
+import { STATUS_META } from "../lib/statusPalette";
 import type { Objective } from "../types";
 
 interface ObjectiveCardProps {
@@ -12,7 +13,10 @@ export function ObjectiveCard({ perspectiveId, objective }: ObjectiveCardProps) 
   const { dispatch } = useMap();
 
   return (
-    <div className="objective-card">
+    <div
+      className="objective-card"
+      style={{ borderTopColor: STATUS_META[objective.status].color }}
+    >
       <button
         type="button"
         className="icon-btn remove-objective-btn"
