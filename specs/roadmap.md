@@ -18,3 +18,8 @@ layer in persistence, then the interactive/populate behaviors.
 - [x] **Phase 4 — Language Selection**: Add i18n support and a language switcher for the app
       UI (e.g. English/Spanish to start), so the tool itself — not just map content — can be
       used in the user's preferred language.
+- [x] **Phase 5 — Responsive Layout**: Real CSS reflow at a phone-width breakpoint across My
+      Maps, the toolbar, and both Create Strategy Map / Track Performance views — a
+      collapsible Sections panel, stacked perspective rows, a wrapping toolbar, and
+      touch-reachable controls — replacing the earlier horizontal-scroll-at-narrow-widths
+      fallback with genuine mobile support.

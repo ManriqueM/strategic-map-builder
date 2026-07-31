@@ -97,8 +97,8 @@ Aligned with `specs/mission.md` (perspectives are customizable, not fixed) and
 
 ## 8. Polish
 
-- Layout at the design's working width (~1440–1600px), with horizontal scroll/responsive
-  fallback on narrower viewports rather than broken layout.
+- Layout at the design's working width (~1440–1600px). (Real phone/tablet responsive reflow —
+  not just a horizontal-scroll fallback — is Phase 5, `specs/features/phase-5-responsive-layout/`.)
 - Empty states (e.g. a perspective with zero objectives still renders sensibly).
 - Verify the responsive grids at count extremes: 1–3 values/objectives (no awkward stretch)
   and 7–8+ (wraps to additional rows at a consistent tile size).

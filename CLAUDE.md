@@ -92,8 +92,10 @@ rest of the width. This deviates from the original design source's stacked layou
 band above the grid) specifically so headers and the objective grid never share horizontal
 space: connectors, which are anchored to objective boxes inside the grid, can't geometrically
 reach the header column at all, regardless of z-order. Keep this in mind before reintroducing
-a full-width header row — it would reopen the header/connector-overlap problem this layout
-was chosen to close structurally.
+a full-width header row above the 767px breakpoint — it would reopen the header/connector-
+overlap problem this layout was chosen to close structurally. Below 767px it *does* revert to
+a stacked header (see Responsive layout below) — that's a deliberate, width-scoped exception,
+not a reversal of this decision.
 
 **Persistence** (`src/lib/storage.ts`): all saved maps live in one `localStorage` key
 (`strategy-map-builder:maps`) as a versioned envelope (`{ version, maps: Record<id, SavedMap> }`).
@@ -114,11 +116,26 @@ framework. The visual design is a pixel-perfect recreation of a specific Claude 
 details and exact palette/fonts in `specs/tech-stack.md`) — match that source rather than
 introducing generic component-library styling.
 
+**Responsive layout**: one breakpoint, `@media (max-width: 767px)`, appended to the end of
+`map.css` (no separate stylesheet). Above it, the app is pixel-identical to the ~1440–1600px
+desktop design. Below it: the Sections panel collapses to hidden-by-default and expands
+in-flow (not an overlay) via a `sectionsOpen` state in `BuilderScreen.tsx`, toggled by a
+`.sections-toggle-btn` in `BuilderToolbar.tsx` that only renders in `"create"` mode; the
+perspective row stacks (see the caveat above); and two previously hover-only remove buttons
+(`.remove-objective-btn`, `.value-tile .remove-value-btn`) are forced visible, since hover
+doesn't exist on touch. Two rules are deliberately *not* gated by the media query —
+`.builder-toolbar`'s `flex-wrap: wrap` and `.mode-toggle-btn`'s `white-space: nowrap` — because
+the toolbar gets tight enough to squeeze button text mid-word around 768–1000px, above the
+phone breakpoint; both are no-ops at the full desktop width where everything already fits on
+one line. When adding new toolbar controls or canvas chrome, check it at ~768px and ~1024px
+too, not just phone width and the 1440px+ design target.
+
 ## Spec-driven workflow
 
 This repo tracks work as phases under `specs/`: `specs/mission.md` (why), `specs/tech-stack.md`
 (technical decisions/design source), `specs/roadmap.md` (phase list), and
-`specs/features/phase-N-<name>/{requirements,plan,validation}.md` per phase. All four roadmap
-phases (Create Strategy Map, save/load, Track Performance, language selection) are currently
-complete. If asked to add a new feature/phase, follow the same three-doc structure as the
-existing `specs/features/phase-*` directories rather than inventing a different format.
+`specs/features/phase-N-<name>/{requirements,plan,validation}.md` per phase. All five roadmap
+phases (Create Strategy Map, save/load, Track Performance, language selection, responsive
+layout) are currently complete. If asked to add a new feature/phase, follow the same
+three-doc structure as the existing `specs/features/phase-*` directories rather than
+inventing a different format.

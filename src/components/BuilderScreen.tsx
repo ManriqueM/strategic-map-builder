@@ -23,6 +23,7 @@ function BuilderInner({
   const [name, setName] = useState(savedMap.name);
   const [dirty, setDirty] = useState(false);
   const [mode, setMode] = useState<BuilderMode>("create");
+  const [sectionsOpen, setSectionsOpen] = useState(false);
   const lastSavedMapRef = useRef(map);
 
   useEffect(() => {
@@ -54,12 +55,14 @@ function BuilderInner({
         onSave={handleSave}
         onRename={handleRename}
         onBack={onBack}
+        sectionsOpen={sectionsOpen}
+        onToggleSections={() => setSectionsOpen((open) => !open)}
       />
       {mode === "track" ? (
         <TrackPerformanceView />
       ) : (
         <div className="app-shell">
-          <SectionsPanel />
+          <SectionsPanel isOpen={sectionsOpen} />
           <main className="map-canvas">
             <Header />
             <VisionMissionBanner />

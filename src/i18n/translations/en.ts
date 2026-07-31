@@ -21,6 +21,7 @@ export const en = {
     back: "← My Maps",
     mapNameAria: "Map name",
     viewModeAria: "View mode",
+    toggleSections: "Sections",
     modeCreate: "Create Strategy Map",
     modeTrack: "Track Performance",
     unsavedChanges: "Unsaved changes",

@@ -1,12 +1,12 @@
 import { useMap } from "../state/useMap";
 import { useTranslation } from "../i18n/useTranslation";
 
-export function SectionsPanel() {
+export function SectionsPanel({ isOpen }: { isOpen: boolean }) {
   const { map, dispatch } = useMap();
   const { t } = useTranslation();
 
   return (
-    <aside className="sections-panel">
+    <aside className={`sections-panel${isOpen ? " is-open" : ""}`}>
       <div className="panel-section">
         <h2>{t("sections.heading")}</h2>
         <label className="toggle-row">

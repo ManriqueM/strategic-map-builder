@@ -23,6 +23,7 @@ export const es: TranslationDict = {
     back: "← Mis Mapas",
     mapNameAria: "Nombre del mapa",
     viewModeAria: "Modo de vista",
+    toggleSections: "Secciones",
     modeCreate: "Crear Mapa Estratégico",
     modeTrack: "Seguimiento del Desempeño",
     unsavedChanges: "Cambios sin guardar",

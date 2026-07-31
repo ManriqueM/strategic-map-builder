@@ -17,6 +17,7 @@
 
 .builder-toolbar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 14px;
   padding: 12px 24px;
@@ -46,6 +47,10 @@
   background: rgba(0, 0, 0, 0.04);
 }
 
+.sections-toggle-btn {
+  display: none;
+}
+
 .mode-toggle {
   display: flex;
   background: var(--color-bg);
@@ -63,6 +68,7 @@
   cursor: pointer;
   padding: 5px 14px;
   border-radius: 3px;
+  white-space: nowrap;
 }
 .mode-toggle-btn.is-active {
   background: var(--color-navy-700);
@@ -766,4 +772,136 @@
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+/* ==== Responsive (mobile) ====
+   Single breakpoint below. A couple of small base-rule additions above (the toolbar's
+   flex-wrap and .mode-toggle-btn's white-space: nowrap) apply at every width — harmless at
+   the ~1440-1600px design target where everything already fits on one line, but needed so
+   tablet-ish widths (768-1024px) wrap the toolbar onto a second line instead of squeezing
+   text inside the mode-toggle buttons. Everything else here only applies below 767px. */
+@media (max-width: 767px) {
+  /* Toolbar already wraps at all widths (see base .builder-toolbar rule); just tighten
+     spacing and shrink the mode toggle further for phone widths. */
+  .builder-toolbar {
+    gap: 8px;
+    padding: 10px 14px;
+  }
+
+  .mode-toggle-btn {
+    font-size: 11px;
+    padding: 5px 9px;
+  }
+
+  .builder-toolbar-status {
+    margin-right: 0;
+    flex-basis: 100%;
+    order: 1;
+  }
+
+  /* Sections panel becomes a collapsible block in normal flow (not an overlay/drawer) —
+     hidden by default, toggled open via .sections-toggle-btn in the toolbar. */
+  .sections-toggle-btn {
+    display: inline-flex;
+  }
+
+  .sections-toggle-btn.is-active {
+    background: var(--color-navy-700);
+    color: var(--color-navy-ink);
+  }
+
+  .app-shell {
+    flex-direction: column;
+  }
+
+  .sections-panel {
+    display: none;
+    position: static;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .builder-shell .sections-panel {
+    height: auto;
+    top: auto;
+  }
+
+  .sections-panel.is-open {
+    display: block;
+  }
+
+  /* Canvas breathing room scaled down for phone widths. */
+  .map-canvas,
+  .interactive-canvas {
+    padding: 24px 16px 48px;
+  }
+
+  .map-title {
+    font-size: 26px;
+  }
+
+  .map-subtitle {
+    margin-bottom: 20px;
+  }
+
+  .vm-banner {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  /* Perspective header reverts to stacking above its objective grid — the fixed 150px
+     side-by-side column only works with real horizontal room to spare. */
+  .perspective-row {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+
+  .perspective-row-head {
+    flex: initial;
+    width: 100%;
+  }
+
+  .perspective-divider {
+    width: auto;
+    height: 1px;
+  }
+
+  .status-legend,
+  .my-maps-header,
+  .my-maps-header-actions {
+    flex-wrap: wrap;
+  }
+
+  /* Touch-reachability: these were hover-only affordances, which don't exist on touch. */
+  .remove-objective-btn {
+    opacity: 1;
+  }
+
+  .value-tile .remove-value-btn {
+    display: flex;
+  }
+
+  .interactive-objective-card .initiative-dot {
+    width: 20px;
+    height: 20px;
+  }
+
+  .interactive-objective-card .initiative-dot svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .icon-btn {
+    padding: 6px 8px;
+  }
+
+  .my-maps-screen {
+    padding: 32px 16px 48px;
+  }
+
+  .my-maps-title {
+    font-size: 24px;
+  }
 }

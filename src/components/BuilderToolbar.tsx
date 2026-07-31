@@ -13,6 +13,8 @@ export function BuilderToolbar({
   onSave,
   onRename,
   onBack,
+  sectionsOpen,
+  onToggleSections,
 }: {
   name: string;
   dirty: boolean;
@@ -21,6 +23,8 @@ export function BuilderToolbar({
   onSave: () => void;
   onRename: (name: string) => void;
   onBack: () => void;
+  sectionsOpen: boolean;
+  onToggleSections: () => void;
 }) {
   const { t } = useTranslation();
   const [confirmingLeave, setConfirmingLeave] = useState(false);
@@ -64,6 +68,17 @@ export function BuilderToolbar({
         ariaLabel={t("builder.mapNameAria")}
         placeholder="Untitled"
       />
+      {mode === "create" && (
+        <button
+          type="button"
+          className={`icon-btn sections-toggle-btn${sectionsOpen ? " is-active" : ""}`}
+          aria-label={t("builder.toggleSections")}
+          aria-expanded={sectionsOpen}
+          onClick={onToggleSections}
+        >
+          {t("builder.toggleSections")}
+        </button>
+      )}
       <div className="mode-toggle" role="group" aria-label={t("builder.viewModeAria")}>
         <button
           type="button"
