@@ -43,7 +43,10 @@ function normalizeMap(saved: SavedMap): SavedMap {
   const needsStatus = saved.map.perspectives.some((p) =>
     p.objectives.some((o) => !o.status),
   );
-  if (!needsConnections && !needsStatus) return saved;
+  const needsInitiativeProgress = saved.map.perspectives.some((p) =>
+    p.objectives.some((o) => o.initiatives.some((i) => !i.progress)),
+  );
+  if (!needsConnections && !needsStatus && !needsInitiativeProgress) return saved;
   return {
     ...saved,
     map: {
@@ -51,7 +54,11 @@ function normalizeMap(saved: SavedMap): SavedMap {
       connections: saved.map.connections ?? [],
       perspectives: saved.map.perspectives.map((p) => ({
         ...p,
-        objectives: p.objectives.map((o) => ({ ...o, status: o.status ?? "none" })),
+        objectives: p.objectives.map((o) => ({
+          ...o,
+          status: o.status ?? "none",
+          initiatives: o.initiatives.map((i) => ({ ...i, progress: i.progress ?? "none" })),
+        })),
       })),
     },
   };

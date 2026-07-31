@@ -13,19 +13,20 @@ connections, and track status over time, right in the browser.
 
 ## Features
 
-- **Builder UI** — A visual editor matching a clean, bespoke design. Comes with sensible
-  defaults (Mission, Vision, Values, and the four classic Balanced Scorecard perspectives:
-  Financial, Customer, Internal Process, Learning & Growth), but nothing is fixed — rename,
-  add, remove, reorder, toggle visibility, and edit any section, perspective, objective, or
-  initiative inline.
+- **Create Strategy Map** — A visual editor matching a clean, bespoke design. Comes with
+  sensible defaults (Mission, Vision, Values, and the four classic Balanced Scorecard
+  perspectives: Financial, Customer, Internal Process, Learning & Growth), but nothing is
+  fixed — rename, add, remove, reorder, toggle visibility, and edit any section, perspective,
+  objective, or initiative inline. In the same mode, click one objective card, then another,
+  to draw a directional connection between them; hover a connection to highlight it, click it
+  to remove it.
 - **Save/Load** — Save named maps to your browser and manage them from a "My Maps" list:
   open, rename, duplicate, or delete any saved map. No account or backend required.
-- **Interactive connections** — Switch a saved map into an interactive view and click one
-  objective, then another, to draw a directional connection between them. Hover a connection
-  to highlight it, click it to remove it.
-- **Status tracking** — Assign each objective an On Track / Needs Attention / Off Track status
-  with a click. Status is reflected as a colored border everywhere the objective appears, with
-  a legend for reference.
+- **Track Performance** — Switch a saved map into a read-only view and assign each objective
+  an On Track / Needs Attention / Off Track status with a click, reflected as a colored
+  border, with a legend for reference. Each initiative also gets its own On Track / In
+  Progress / Not On Track marker — click its dot to cycle it. Both colorings only appear in
+  this view; Create Strategy Map always shows plain, neutral cards while you're authoring.
 - **Language selection** — Switch the app's own interface between English and Spanish from a
   selector on either screen; your choice is remembered. (Map content always stays exactly as
   you typed it, regardless of the interface language.)
@@ -67,13 +68,15 @@ npm run lint     # Run oxlint
 **Getting started in the app:**
 
 1. From the **My Maps** screen, click **+ New map** to create a map from the default template.
-2. In **Edit** mode, fill in your mission, vision, values, and perspectives — click any text to
-   edit it in place, and use the sections panel to show/hide or reorder perspectives.
-3. Click **Save** whenever you want to persist your changes.
-4. Switch to **Connect** mode to wire objectives together: click one objective, then another,
-   to draw a connection; hover a connection to highlight it, click it to remove it.
-5. Switch to **Status** mode to assign each objective's status: click a card to cycle it
-   through On Track → Needs Attention → Off Track → no status.
+2. In **Create Strategy Map** mode, fill in your mission, vision, values, and perspectives —
+   click any text to edit it in place, and use the sections panel to show/hide or reorder
+   perspectives.
+3. In the same mode, click one objective card, then another, to draw a connection between
+   them; hover a connection to highlight it, click it to remove it.
+4. Click **Save** whenever you want to persist your changes.
+5. Switch to **Track Performance** mode to assign each objective's status: click a card to
+   cycle it through On Track → Needs Attention → Off Track → no status. Click an initiative's
+   dot to cycle its own progress: On Track → In Progress → Not On Track → no progress.
 6. Use the language selector in the header to switch the interface between English and
    Spanish at any time.
 
@@ -84,7 +87,7 @@ strategy-map-builder/
 ├── src/
 │   ├── components/       # UI components (builder canvas, toolbar, interactive views, etc.)
 │   ├── state/            # Map state (reducer, context) and connector-geometry hooks
-│   ├── lib/               # Storage layer, default map template, status/perspective palettes
+│   ├── lib/               # Storage layer, default map template, status/progress palettes
 │   ├── i18n/              # Language context, translation dictionaries (en/es)
 │   ├── styles/            # Design tokens and component styles
 │   ├── types.ts           # Core data model (StrategyMap, Perspective, Objective, etc.)
@@ -99,14 +102,13 @@ strategy-map-builder/
 
 ## Roadmap
 
-- [x] **Phase 1 — Builder UI**: Static strategy map builder with customizable sections and
-      perspectives.
+- [x] **Phase 1 — Create Strategy Map**: Strategy map builder with customizable sections and
+      perspectives, plus click-to-connect objectives with bezier connectors, in one mode.
 - [x] **Phase 2 — Save/Load**: Persist maps to `localStorage`, with a My Maps list.
-- [x] **Phase 3 — Interactive view: connections**: Click-to-connect objectives with bezier
-      connectors.
-- [x] **Phase 4 — Interactive view: status**: On-track / needs-attention / off-track status
-      with color coding and a legend.
-- [x] **Phase 5 — Language selection**: English/Spanish interface with a persisted language
+- [x] **Phase 3 — Track Performance**: On-track / needs-attention / off-track objective
+      status and on-track / in-progress / not-on-track initiative progress, both with color
+      coding shown only in this view.
+- [x] **Phase 4 — Language selection**: English/Spanish interface with a persisted language
       switcher.
 
 ## License

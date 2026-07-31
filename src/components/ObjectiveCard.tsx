@@ -2,30 +2,44 @@ import { useMap } from "../state/useMap";
 import { useTranslation } from "../i18n/useTranslation";
 import { EditableText } from "./EditableText";
 import { InitiativeRow } from "./InitiativeRow";
-import { STATUS_META } from "../lib/statusPalette";
 import type { Objective } from "../types";
 
 interface ObjectiveCardProps {
   perspectiveId: string;
   objective: Objective;
+  boxRef: (el: HTMLElement | null) => void;
+  isPending: boolean;
+  isHot: boolean;
+  onSelectForConnect: () => void;
 }
 
-export function ObjectiveCard({ perspectiveId, objective }: ObjectiveCardProps) {
+export function ObjectiveCard({
+  perspectiveId,
+  objective,
+  boxRef,
+  isPending,
+  isHot,
+  onSelectForConnect,
+}: ObjectiveCardProps) {
   const { dispatch } = useMap();
   const { t } = useTranslation();
 
+  const stateClass = isPending ? " is-pending" : isHot ? " is-hot" : "";
+
   return (
     <div
-      className="objective-card"
-      style={{ borderTopColor: STATUS_META[objective.status].color }}
+      ref={boxRef}
+      className={`objective-card${stateClass}`}
+      onClick={onSelectForConnect}
     >
       <button
         type="button"
         className="icon-btn remove-objective-btn"
         aria-label={t("canvas.removeObjectiveAria", { text: objective.text })}
-        onClick={() =>
-          dispatch({ type: "REMOVE_OBJECTIVE", perspectiveId, objectiveId: objective.id })
-        }
+        onClick={(e) => {
+          e.stopPropagation();
+          dispatch({ type: "REMOVE_OBJECTIVE", perspectiveId, objectiveId: objective.id });
+        }}
       >
         ×
       </button>
@@ -50,9 +64,10 @@ export function ObjectiveCard({ perspectiveId, objective }: ObjectiveCardProps) 
         <button
           type="button"
           className="add-initiative-btn"
-          onClick={() =>
-            dispatch({ type: "ADD_INITIATIVE", perspectiveId, objectiveId: objective.id })
-          }
+          onClick={(e) => {
+            e.stopPropagation();
+            dispatch({ type: "ADD_INITIATIVE", perspectiveId, objectiveId: objective.id });
+          }}
         >
           {t("canvas.addInitiative")}
         </button>

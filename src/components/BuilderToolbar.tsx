@@ -3,7 +3,7 @@ import { useTranslation } from "../i18n/useTranslation";
 import { EditableText } from "./EditableText";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
-export type BuilderMode = "edit" | "connect" | "status";
+export type BuilderMode = "create" | "track";
 
 export function BuilderToolbar({
   name,
@@ -67,24 +67,17 @@ export function BuilderToolbar({
       <div className="mode-toggle" role="group" aria-label={t("builder.viewModeAria")}>
         <button
           type="button"
-          className={`mode-toggle-btn${mode === "edit" ? " is-active" : ""}`}
-          onClick={() => onModeChange("edit")}
+          className={`mode-toggle-btn${mode === "create" ? " is-active" : ""}`}
+          onClick={() => onModeChange("create")}
         >
-          {t("builder.modeEdit")}
+          {t("builder.modeCreate")}
         </button>
         <button
           type="button"
-          className={`mode-toggle-btn${mode === "connect" ? " is-active" : ""}`}
-          onClick={() => onModeChange("connect")}
+          className={`mode-toggle-btn${mode === "track" ? " is-active" : ""}`}
+          onClick={() => onModeChange("track")}
         >
-          {t("builder.modeConnect")}
-        </button>
-        <button
-          type="button"
-          className={`mode-toggle-btn${mode === "status" ? " is-active" : ""}`}
-          onClick={() => onModeChange("status")}
-        >
-          {t("builder.modeStatus")}
+          {t("builder.modeTrack")}
         </button>
       </div>
       <span className="builder-toolbar-status">

@@ -6,16 +6,12 @@ import type { ConnectorPathData } from "../state/useConnectorPaths";
 export function InteractivePerspectiveRow({
   perspective,
   number,
-  mode,
-  pendingId,
   hoveredConnection,
   onBoxClick,
   getBoxRef,
 }: {
   perspective: Perspective;
   number: number;
-  mode: "connect" | "status";
-  pendingId: string | null;
   hoveredConnection: ConnectorPathData | null;
   onBoxClick: (perspectiveId: string, objectiveId: string) => void;
   getBoxRef: (id: string) => (el: HTMLElement | null) => void;
@@ -29,16 +25,15 @@ export function InteractivePerspectiveRow({
           {label}
         </div>
         <span className="perspective-name">{perspective.name || "Untitled"}</span>
-        <div className="perspective-divider" />
       </div>
+      <div className="perspective-divider" />
       <div className="objective-grid">
         {perspective.objectives.map((objective) => (
           <InteractiveObjectiveCard
             key={objective.id}
+            perspectiveId={perspective.id}
             objective={objective}
             boxRef={getBoxRef(objective.id)}
-            mode={mode}
-            isPending={pendingId === objective.id}
             hoveredConnection={hoveredConnection}
             onClick={() => onBoxClick(perspective.id, objective.id)}
           />

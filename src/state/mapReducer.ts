@@ -1,5 +1,5 @@
 import { makeId } from "../lib/id";
-import type { ObjectiveStatus, StrategyMap } from "../types";
+import type { InitiativeProgress, ObjectiveStatus, StrategyMap } from "../types";
 
 export type MapAction =
   | { type: "SET_TITLE"; text: string }
@@ -37,6 +37,13 @@ export type MapAction =
       objectiveId: string;
       initiativeId: string;
       text: string;
+    }
+  | {
+      type: "SET_INITIATIVE_PROGRESS";
+      perspectiveId: string;
+      objectiveId: string;
+      initiativeId: string;
+      progress: InitiativeProgress;
     }
   | { type: "ADD_CONNECTION"; from: string; to: string }
   | { type: "REMOVE_CONNECTION"; id: string };
@@ -236,7 +243,7 @@ export function mapReducer(state: StrategyMap, action: MapAction): StrategyMap {
                         ...o,
                         initiatives: [
                           ...o.initiatives,
-                          { id: makeId("init"), text: "New initiative" },
+                          { id: makeId("init"), text: "New initiative", progress: "none" },
                         ],
                       }
                     : o,
@@ -281,6 +288,30 @@ export function mapReducer(state: StrategyMap, action: MapAction): StrategyMap {
                         ...o,
                         initiatives: o.initiatives.map((i) =>
                           i.id === action.initiativeId ? { ...i, text: action.text } : i,
+                        ),
+                      }
+                    : o,
+                ),
+              }
+            : p,
+        ),
+      };
+
+    case "SET_INITIATIVE_PROGRESS":
+      return {
+        ...state,
+        perspectives: state.perspectives.map((p) =>
+          p.id === action.perspectiveId
+            ? {
+                ...p,
+                objectives: p.objectives.map((o) =>
+                  o.id === action.objectiveId
+                    ? {
+                        ...o,
+                        initiatives: o.initiatives.map((i) =>
+                          i.id === action.initiativeId
+                            ? { ...i, progress: action.progress }
+                            : i,
                         ),
                       }
                     : o,

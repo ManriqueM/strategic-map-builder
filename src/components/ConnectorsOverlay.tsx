@@ -18,23 +18,39 @@ export function ConnectorsOverlay({
       <defs>
         <marker
           id="cxArrow"
-          markerWidth="8"
-          markerHeight="8"
-          refX="8"
-          refY="4"
-          orient="auto-start-reverse"
+          markerWidth="12"
+          markerHeight="12"
+          refX="10"
+          refY="6"
+          orient="auto"
+          markerUnits="userSpaceOnUse"
         >
-          <path d="M 0 0 L 8 4 L 0 8 Z" fill="var(--color-connector)" />
+          <path
+            d="M 3 2 L 10 6 L 3 10"
+            fill="none"
+            stroke="var(--color-connector)"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </marker>
         <marker
           id="cxArrowHot"
-          markerWidth="8"
-          markerHeight="8"
-          refX="8"
-          refY="4"
-          orient="auto-start-reverse"
+          markerWidth="13"
+          markerHeight="13"
+          refX="10.5"
+          refY="6.5"
+          orient="auto"
+          markerUnits="userSpaceOnUse"
         >
-          <path d="M 0 0 L 8 4 L 0 8 Z" fill="var(--color-connector-hot)" />
+          <path
+            d="M 3 2.5 L 10.5 6.5 L 3 10.5"
+            fill="none"
+            stroke="var(--color-connector-hot)"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </marker>
       </defs>
       {paths.map((p) => {

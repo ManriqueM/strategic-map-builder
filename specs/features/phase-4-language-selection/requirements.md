@@ -1,4 +1,4 @@
-# Phase 5 — Language Selection: Requirements
+# Phase 4 — Language Selection: Requirements
 
 ## Scope
 
@@ -22,13 +22,13 @@ sessions.
   status legend. Concretely:
   - My Maps screen: kicker, "My Maps" title, "+ New map", empty state, "Last edited …" row
     label, Rename/Duplicate/Delete actions, the inline delete-confirmation prompt/buttons.
-  - Builder toolbar: "← My Maps", the Edit/Connect/Status mode labels, the
+  - Builder toolbar: "← My Maps", the Create Strategy Map/Track Performance mode labels, the
     Saved/Unsaved-changes indicator, "Save", the unsaved-changes-leave confirmation banner.
   - Sections panel: "Sections", Mission/Vision/Values toggle labels, "Perspectives",
     "+ Add perspective", and the move-up/move-down/remove-perspective action labels.
-  - Map canvas chrome: the "Strategy Map" kicker (Edit and Connect/Status modes both), "+ Add
-    value", "+ Add initiative".
-  - Interactive view: the Connect-mode and Status-mode instructional hint text.
+  - Map canvas chrome: the "Strategy Map" kicker (Create Strategy Map and Track Performance
+    modes both), "+ Add value", "+ Add initiative".
+  - Interactive view: the connect and track-performance instructional hint text.
   - Status legend: "Status" label and the three status names (On Track / Needs Attention /
     Off Track).
 - **Dynamic aria-labels get translated templates**: labels that interpolate a user's own text

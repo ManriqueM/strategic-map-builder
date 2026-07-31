@@ -1,4 +1,4 @@
-# Phase 5 — Language Selection: Validation
+# Phase 4 — Language Selection: Validation
 
 ## Automated
 
@@ -13,11 +13,13 @@
    title, "+ New map", empty state (if no maps), and each map row's Rename/Duplicate/Delete
    all switch to Spanish immediately, no reload needed.
 3. **Builder chrome translates**: open a map, switch to Español → "← Mis Mapas", the
-   Edit/Connect/Status labels, the Saved/Unsaved-changes text, "Guardar", and the sections
-   panel (Secciones/Misión/Visión/Valores/Perspectivas/+ Agregar perspectiva) all translate.
-4. **Interactive view + status legend translate**: switch to Connect mode → hint text is in
-   Spanish; switch to Status mode → hint text and the legend ("Estado", "En curso", "Necesita
-   atención", "Fuera de curso") are in Spanish.
+   Crear Mapa Estratégico/Seguimiento del Desempeño labels, the Saved/Unsaved-changes text,
+   "Guardar", and the sections panel (Secciones/Misión/Visión/Valores/Perspectivas/+ Agregar
+   perspectiva) all translate.
+4. **Interactive view + status legend translate**: in Create Strategy Map mode, the
+   click-to-connect hint text is in Spanish; switch to Track Performance mode → the
+   click-to-cycle hint text and the legend ("Estado", "En curso", "Necesita atención", "Fuera
+   de curso") are in Spanish.
 5. **Map content is unaffected**: with an existing map that has custom mission/vision/values/
    objective/perspective text, switching languages does not alter any of that text — only the
    surrounding chrome (labels, buttons, hints) changes.
@@ -28,5 +30,5 @@
    chrome (on both My Maps and, after reopening a map, the builder) without re-selecting it.
 8. **Switch back to English**: confirm every string that changed in steps 2–6 reverts to its
    English wording, and nothing is left half-translated.
-9. **No regressions**: all Phase 1–4 functionality (editing, save/load, connections, status
+9. **No regressions**: all Phase 1–3 functionality (editing, save/load, connections, status
    cycling) still works identically regardless of which language is active.

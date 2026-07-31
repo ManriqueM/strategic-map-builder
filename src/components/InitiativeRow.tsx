@@ -36,14 +36,15 @@ export function InitiativeRow({ perspectiveId, objectiveId, initiative }: Initia
         type="button"
         className="icon-btn"
         aria-label={t("canvas.removeInitiativeAria", { text: initiative.text })}
-        onClick={() =>
+        onClick={(e) => {
+          e.stopPropagation();
           dispatch({
             type: "REMOVE_INITIATIVE",
             perspectiveId,
             objectiveId,
             initiativeId: initiative.id,
-          })
-        }
+          });
+        }}
       >
         ×
       </button>

@@ -4,13 +4,25 @@ import { EditableText } from "./EditableText";
 import { ObjectiveCard } from "./ObjectiveCard";
 import { perspectiveColor } from "../lib/perspectivePalette";
 import type { Perspective } from "../types";
+import type { ConnectorPathData } from "../state/useConnectorPaths";
 
 interface PerspectiveRowProps {
   perspective: Perspective;
   number: number;
+  pendingId: string | null;
+  hoveredConnection: ConnectorPathData | null;
+  onSelectForConnect: (objectiveId: string) => void;
+  getBoxRef: (id: string) => (el: HTMLElement | null) => void;
 }
 
-export function PerspectiveRow({ perspective, number }: PerspectiveRowProps) {
+export function PerspectiveRow({
+  perspective,
+  number,
+  pendingId,
+  hoveredConnection,
+  onSelectForConnect,
+  getBoxRef,
+}: PerspectiveRowProps) {
   const { dispatch } = useMap();
   const { t } = useTranslation();
   const label = String(number).padStart(2, "0");
@@ -29,16 +41,25 @@ export function PerspectiveRow({ perspective, number }: PerspectiveRowProps) {
           ariaLabel={t("canvas.perspectiveNameAria")}
           placeholder="New Perspective"
         />
-        <div className="perspective-divider" />
       </div>
+      <div className="perspective-divider" />
       <div className="objective-grid">
-        {perspective.objectives.map((objective) => (
-          <ObjectiveCard
-            key={objective.id}
-            perspectiveId={perspective.id}
-            objective={objective}
-          />
-        ))}
+        {perspective.objectives.map((objective) => {
+          const isHot =
+            !!hoveredConnection &&
+            (hoveredConnection.from === objective.id || hoveredConnection.to === objective.id);
+          return (
+            <ObjectiveCard
+              key={objective.id}
+              perspectiveId={perspective.id}
+              objective={objective}
+              boxRef={getBoxRef(objective.id)}
+              isPending={pendingId === objective.id}
+              isHot={isHot}
+              onSelectForConnect={() => onSelectForConnect(objective.id)}
+            />
+          );
+        })}
         <button
           type="button"
           className="add-objective-card"

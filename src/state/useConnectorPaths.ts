@@ -45,10 +45,16 @@ export function useConnectorPaths(
     const t1 = setTimeout(measure, 300);
     const t2 = setTimeout(measure, 800);
     window.addEventListener("resize", measure);
+
+    const resizeObserver = new ResizeObserver(measure);
+    if (containerRef.current) resizeObserver.observe(containerRef.current);
+    for (const el of boxEls.current.values()) resizeObserver.observe(el);
+
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
       window.removeEventListener("resize", measure);
+      resizeObserver.disconnect();
     };
   }, [containerRef, boxEls, connections]);
 

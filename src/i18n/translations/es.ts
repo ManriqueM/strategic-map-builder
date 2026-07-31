@@ -23,9 +23,8 @@ export const es: TranslationDict = {
     back: "← Mis Mapas",
     mapNameAria: "Nombre del mapa",
     viewModeAria: "Modo de vista",
-    modeEdit: "Editar",
-    modeConnect: "Conectar",
-    modeStatus: "Estado",
+    modeCreate: "Crear Mapa Estratégico",
+    modeTrack: "Seguimiento del Desempeño",
     unsavedChanges: "Cambios sin guardar",
     saved: "Guardado",
     save: "Guardar",
@@ -66,11 +65,18 @@ export const es: TranslationDict = {
       "Haz clic en un objetivo y luego en otro para conectarlos. Haz clic en una conexión para eliminarla.",
     statusHint:
       "Haz clic en un objetivo para cambiar su estado: En curso → Necesita atención → Fuera de curso → Sin estado.",
+    initiativeProgressAria: "Cambiar el progreso de {{text}}: actualmente {{progress}}",
   },
   status: {
     label: "Estado",
     onTrack: "En curso",
     needsAttention: "Necesita atención",
     offTrack: "Fuera de curso",
+  },
+  initiativeProgress: {
+    notStarted: "Sin iniciar",
+    onTrack: "En curso",
+    inProgress: "En progreso",
+    notOnTrack: "Sin avance",
   },
 };

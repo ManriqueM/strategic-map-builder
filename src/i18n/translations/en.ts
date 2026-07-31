@@ -21,9 +21,8 @@ export const en = {
     back: "← My Maps",
     mapNameAria: "Map name",
     viewModeAria: "View mode",
-    modeEdit: "Edit",
-    modeConnect: "Connect",
-    modeStatus: "Status",
+    modeCreate: "Create Strategy Map",
+    modeTrack: "Track Performance",
     unsavedChanges: "Unsaved changes",
     saved: "Saved",
     save: "Save",
@@ -64,12 +63,19 @@ export const en = {
       "Click an objective, then click another to connect them. Click a connection to remove it.",
     statusHint:
       "Click an objective to cycle its status: On Track → Needs Attention → Off Track → No status.",
+    initiativeProgressAria: "Cycle progress for {{text}}: currently {{progress}}",
   },
   status: {
     label: "Status",
     onTrack: "On Track",
     needsAttention: "Needs Attention",
     offTrack: "Off Track",
+  },
+  initiativeProgress: {
+    notStarted: "Not started",
+    onTrack: "On Track",
+    inProgress: "In Progress",
+    notOnTrack: "Not On Track",
   },
 };
 

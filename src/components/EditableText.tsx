@@ -80,6 +80,7 @@ export function EditableText({
       data-placeholder={placeholder}
       onBlur={handleBlur}
       onKeyDown={handleKeyDown}
+      onClick={(e) => e.stopPropagation()}
     />
   );
 }

@@ -1,4 +1,4 @@
-# Phase 5 — Language Selection: Plan
+# Phase 4 — Language Selection: Plan
 
 Aligns with `specs/mission.md` (a self-serve tool meant to eventually be offered to others,
 so its own UI shouldn't be English-locked) and `specs/tech-stack.md` (no framework
@@ -43,8 +43,8 @@ dependencies beyond React/TS/Vite — this phase follows that lead for i18n too)
 
 ## 5. Translate builder toolbar
 
-- `src/components/BuilderToolbar.tsx`: "← My Maps", Edit/Connect/Status labels, the mode
-  toggle's group aria-label, the Saved/Unsaved-changes text, "Save", and the
+- `src/components/BuilderToolbar.tsx`: "← My Maps", Create Strategy Map/Track Performance
+  labels, the mode toggle's group aria-label, the Saved/Unsaved-changes text, "Save", and the
   unsaved-changes-leave confirmation banner (message + Keep-editing/Discard-and-leave
   buttons).
 
@@ -53,15 +53,17 @@ dependencies beyond React/TS/Vite — this phase follows that lead for i18n too)
 - `src/components/SectionsPanel.tsx`: "Sections", Mission/Vision/Values toggle labels,
   "Perspectives", "+ Add perspective", and the move-up/move-down/remove-perspective
   aria-label templates.
-- `src/components/Header.tsx` and `src/components/InteractiveMap.tsx`: the shared "Strategy
-  Map" kicker string (one translation key, used in both places).
+- `src/components/Header.tsx` and `src/components/TrackPerformanceView.tsx`: the shared
+  "Strategy Map" kicker string (one translation key, used in both places).
 - `src/components/ValuesRow.tsx`: "+ Add value" (and its aria-label template).
 - `src/components/ObjectiveCard.tsx` / `InitiativeRow.tsx`: "+ Add initiative" and the
   remove-objective/remove-initiative aria-label templates.
 
 ## 7. Translate interactive view and status legend
 
-- `src/components/InteractiveMap.tsx`: the Connect-mode and Status-mode hint paragraphs.
+- `src/components/PerspectivesSection.tsx` (Create Strategy Map's connect hint) and
+  `src/components/TrackPerformanceView.tsx` (the status-cycle hint): the two instructional
+  hint paragraphs.
 - `src/components/StatusLegend.tsx` / `src/lib/statusPalette.ts`: the "Status" label and the
   three status names — move the display labels into the translation dictionaries (keep
   `statusPalette.ts`'s color/cycle logic as-is; it stops owning label text).

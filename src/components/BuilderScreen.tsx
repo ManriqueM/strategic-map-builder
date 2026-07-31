@@ -8,7 +8,7 @@ import { VisionMissionBanner } from "./VisionMissionBanner";
 import { ValuesRow } from "./ValuesRow";
 import { PerspectivesSection } from "./PerspectivesSection";
 import { BuilderToolbar, type BuilderMode } from "./BuilderToolbar";
-import { InteractiveMap } from "./InteractiveMap";
+import { TrackPerformanceView } from "./TrackPerformanceView";
 
 function BuilderInner({
   savedMap,
@@ -22,7 +22,7 @@ function BuilderInner({
   const { map } = useMap();
   const [name, setName] = useState(savedMap.name);
   const [dirty, setDirty] = useState(false);
-  const [mode, setMode] = useState<BuilderMode>("edit");
+  const [mode, setMode] = useState<BuilderMode>("create");
   const lastSavedMapRef = useRef(map);
 
   useEffect(() => {
@@ -55,8 +55,8 @@ function BuilderInner({
         onRename={handleRename}
         onBack={onBack}
       />
-      {mode === "connect" || mode === "status" ? (
-        <InteractiveMap mode={mode} />
+      {mode === "track" ? (
+        <TrackPerformanceView />
       ) : (
         <div className="app-shell">
           <SectionsPanel />

@@ -1,6 +1,9 @@
+export type InitiativeProgress = "none" | "on-track" | "in-progress" | "not-on-track";
+
 export interface Initiative {
   id: string;
   text: string;
+  progress: InitiativeProgress;
 }
 
 export type ObjectiveStatus = "none" | "on-track" | "needs-attention" | "off-track";
