@@ -10,10 +10,10 @@ layer in persistence, then the interactive/populate behaviors.
 - [x] **Phase 2 — Save/Load**: Persist a built map to `localStorage` and load it back;
       basic list of saved maps.
 - [x] **Phase 3 — Track Performance**: A read-only view for assigning per-objective
-      on-track / needs-attention / off-track status and per-initiative on-track / in-progress
-      / not-on-track progress, seeing both reflected as color coding (colored top border on
-      objective cards, a clickable colored dot on each initiative, and a status legend) —
-      these colors only appear in this view, not while authoring.
+      on-track / needs-attention / off-track status (colored top border + a status legend)
+      and per-initiative progress — Not on Track / On Track / Complete, each with its own
+      icon (✕ / → / ✓) and color, click-to-cycle, with its own legend — both only shown in
+      this view, not while authoring.
 - [x] **Phase 4 — Language Selection**: Add i18n support and a language switcher for the app
       UI (e.g. English/Spanish to start), so the tool itself — not just map content — can be
       used in the user's preferred language.

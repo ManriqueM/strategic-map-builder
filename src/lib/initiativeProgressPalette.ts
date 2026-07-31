@@ -1,17 +1,15 @@
 import type { InitiativeProgress } from "../types";
 
 export const INITIATIVE_PROGRESS_META: Record<InitiativeProgress, { color: string }> = {
-  none: { color: "var(--color-status-neutral)" },
-  "on-track": { color: "var(--color-status-on-track)" },
-  "in-progress": { color: "var(--color-status-attention)" },
-  "not-on-track": { color: "var(--color-status-off-track)" },
+  "not-on-track": { color: "var(--color-status-neutral)" },
+  "on-track": { color: "var(--color-navy-700)" },
+  complete: { color: "var(--color-status-on-track)" },
 };
 
 export const INITIATIVE_PROGRESS_CYCLE: InitiativeProgress[] = [
-  "none",
-  "on-track",
-  "in-progress",
   "not-on-track",
+  "on-track",
+  "complete",
 ];
 
 export function nextInitiativeProgress(current: InitiativeProgress): InitiativeProgress {
@@ -20,8 +18,7 @@ export function nextInitiativeProgress(current: InitiativeProgress): InitiativeP
 }
 
 export const INITIATIVE_PROGRESS_LABEL_KEYS: Record<InitiativeProgress, string> = {
-  none: "initiativeProgress.notStarted",
-  "on-track": "initiativeProgress.onTrack",
-  "in-progress": "initiativeProgress.inProgress",
   "not-on-track": "initiativeProgress.notOnTrack",
+  "on-track": "initiativeProgress.onTrack",
+  complete: "initiativeProgress.complete",
 };

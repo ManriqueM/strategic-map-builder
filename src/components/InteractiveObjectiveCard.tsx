@@ -6,6 +6,7 @@ import {
   INITIATIVE_PROGRESS_META,
   nextInitiativeProgress,
 } from "../lib/initiativeProgressPalette";
+import { InitiativeProgressIcon } from "./InitiativeProgressIcon";
 import type { Objective } from "../types";
 import type { ConnectorPathData } from "../state/useConnectorPaths";
 
@@ -45,7 +46,7 @@ export function InteractiveObjectiveCard({
             <button
               type="button"
               className="initiative-dot"
-              style={{ background: INITIATIVE_PROGRESS_META[initiative.progress].color }}
+              style={{ color: INITIATIVE_PROGRESS_META[initiative.progress].color }}
               title={t(INITIATIVE_PROGRESS_LABEL_KEYS[initiative.progress])}
               aria-label={t("interactive.initiativeProgressAria", {
                 text: initiative.text,
@@ -61,7 +62,9 @@ export function InteractiveObjectiveCard({
                   progress: nextInitiativeProgress(initiative.progress),
                 });
               }}
-            />
+            >
+              <InitiativeProgressIcon progress={initiative.progress} />
+            </button>
             <span className="initiative-text">{initiative.text}</span>
           </div>
         ))}

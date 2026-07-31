@@ -9,6 +9,7 @@ import { ValuesRow } from "./ValuesRow";
 import { ConnectorsOverlay } from "./ConnectorsOverlay";
 import { InteractivePerspectiveRow } from "./InteractivePerspectiveRow";
 import { StatusLegend } from "./StatusLegend";
+import { InitiativeProgressLegend } from "./InitiativeProgressLegend";
 
 export function TrackPerformanceView() {
   const { map, dispatch } = useMap();
@@ -61,6 +62,7 @@ export function TrackPerformanceView() {
         ))}
       </div>
       <StatusLegend />
+      <InitiativeProgressLegend />
     </div>
   );
 }

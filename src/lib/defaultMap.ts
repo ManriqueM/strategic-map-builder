@@ -2,7 +2,7 @@ import { makeId } from "./id";
 import type { Initiative, Objective, Perspective, StrategyMap } from "../types";
 
 function makeInitiative(text: string): Initiative {
-  return { id: makeId("init"), text, progress: "none" };
+  return { id: makeId("init"), text, progress: "not-on-track" };
 }
 
 function makeObjective(text: string, initiativeTexts: string[]): Objective {

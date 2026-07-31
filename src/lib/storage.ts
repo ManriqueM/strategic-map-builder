@@ -1,4 +1,4 @@
-import type { StrategyMap } from "../types";
+import type { InitiativeProgress, StrategyMap } from "../types";
 
 const STORAGE_KEY = "strategy-map-builder:maps";
 const ENVELOPE_VERSION = 1;
@@ -38,13 +38,29 @@ function writeEnvelope(envelope: Envelope): void {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(envelope));
 }
 
+// Maps saved before this initiative-progress revision may carry the old four-state model
+// (`"none" | "on-track" | "in-progress" | "not-on-track"`) or be missing the field entirely.
+type LegacyInitiativeProgress = InitiativeProgress | "none" | "in-progress" | undefined;
+
+function normalizeInitiativeProgress(progress: LegacyInitiativeProgress): InitiativeProgress {
+  if (progress === "in-progress") return "on-track";
+  if (progress === "not-on-track" || progress === "on-track" || progress === "complete") {
+    return progress;
+  }
+  return "not-on-track";
+}
+
 function normalizeMap(saved: SavedMap): SavedMap {
   const needsConnections = !saved.map.connections;
   const needsStatus = saved.map.perspectives.some((p) =>
     p.objectives.some((o) => !o.status),
   );
   const needsInitiativeProgress = saved.map.perspectives.some((p) =>
-    p.objectives.some((o) => o.initiatives.some((i) => !i.progress)),
+    p.objectives.some((o) =>
+      o.initiatives.some(
+        (i) => normalizeInitiativeProgress(i.progress as LegacyInitiativeProgress) !== i.progress,
+      ),
+    ),
   );
   if (!needsConnections && !needsStatus && !needsInitiativeProgress) return saved;
   return {
@@ -57,7 +73,10 @@ function normalizeMap(saved: SavedMap): SavedMap {
         objectives: p.objectives.map((o) => ({
           ...o,
           status: o.status ?? "none",
-          initiatives: o.initiatives.map((i) => ({ ...i, progress: i.progress ?? "none" })),
+          initiatives: o.initiatives.map((i) => ({
+            ...i,
+            progress: normalizeInitiativeProgress(i.progress as LegacyInitiativeProgress),
+          })),
         })),
       })),
     },

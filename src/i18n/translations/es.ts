@@ -74,9 +74,9 @@ export const es: TranslationDict = {
     offTrack: "Fuera de curso",
   },
   initiativeProgress: {
-    notStarted: "Sin iniciar",
-    onTrack: "En curso",
-    inProgress: "En progreso",
+    label: "Progreso",
     notOnTrack: "Sin avance",
+    onTrack: "En curso",
+    complete: "Completado",
   },
 };

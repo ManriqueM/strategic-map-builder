@@ -243,7 +243,7 @@ export function mapReducer(state: StrategyMap, action: MapAction): StrategyMap {
                         ...o,
                         initiatives: [
                           ...o.initiatives,
-                          { id: makeId("init"), text: "New initiative", progress: "none" },
+                          { id: makeId("init"), text: "New initiative", progress: "not-on-track" },
                         ],
                       }
                     : o,

@@ -72,10 +72,10 @@ export const en = {
     offTrack: "Off Track",
   },
   initiativeProgress: {
-    notStarted: "Not started",
+    label: "Progress",
+    notOnTrack: "Not on Track",
     onTrack: "On Track",
-    inProgress: "In Progress",
-    notOnTrack: "Not On Track",
+    complete: "Complete",
   },
 };
 

@@ -567,7 +567,18 @@
 }
 
 .interactive-objective-card .initiative-dot {
+  width: 13px;
+  height: 13px;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+}
+
+.interactive-objective-card .initiative-dot svg {
+  width: 11px;
+  height: 11px;
 }
 
 .interactive-objective-card .initiative-dot:hover,
@@ -718,6 +729,24 @@
   font-size: 13px;
   font-weight: 600;
   color: var(--color-text);
+}
+
+.initiative-progress-legend {
+  margin-top: 14px;
+  padding-top: 0;
+  border-top: none;
+}
+
+.initiative-progress-legend-swatch {
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.initiative-progress-legend-swatch svg {
+  width: 14px;
+  height: 14px;
 }
 
 /* ---- Language switcher ---- */
