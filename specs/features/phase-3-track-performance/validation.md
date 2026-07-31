@@ -22,15 +22,18 @@
 4. **Legend matches assigned colors**: the three legend swatches (On Track / Needs Attention /
    Off Track) visually match the colors used on the cards; the neutral/no-status state has no
    legend entry.
-5. **Initiative progress cycles independently**: in Track Performance mode, an initiative's
-   marker starts as a gray ✕ (Not on Track); click once → turns a navy → arrow (On Track);
-   click again → turns a green ✓ (Complete); click a third time → back to the gray ✕. The
-   parent objective's own status/top-border color does not change from these clicks, and
-   clicking the marker never advances the objective's own status cycle.
-6. **Initiative progress legend matches the marker colors/icons**: the legend shows all three
-   states — ✕ Not on Track, → On Track, ✓ Complete — and the On Track color is visibly
-   distinct from the status legend's amber "Needs Attention" swatch (not the same color, to
-   avoid the two legends being misread against each other).
+5. **Initiative progress cycles through all four states**: in Track Performance mode, a new
+   initiative's marker starts as a blank gray square (unset); click once → a red ✕ (Not on
+   Track); click again → a yellow light bulb (On Track); click again → a green ✓ (Complete);
+   click a fourth time → back to the blank square. The parent objective's own status/
+   top-border color does not change from these clicks, and clicking the marker never advances
+   the objective's own status cycle.
+6. **Initiative progress legend order matches the status legend's color sequence**: the
+   legend shows exactly three entries — in order, ✓ Complete (green), 💡 On Track (amber), ✕
+   Not on Track (red) — the same green → amber → red order as the status legend directly
+   above it, even though the click-cycle order is different (unset → Not on Track → On Track
+   → Complete). The unset/blank state has no legend entry, matching how the status legend
+   omits its own default.
 7. **Initiative progress is Track-Performance-only**: switch to Create Strategy Map mode →
    every initiative marker is a plain, uncolored, non-interactive dot (hovering it shows no
    pointer cursor or ring), regardless of progress assigned in Track Performance.
@@ -51,10 +54,14 @@
     connections; assigning a new status, initiative progress, and connecting objectives all
     still work from that point.
 12. **Old initiative-progress-model migration**: on a map with an initiative whose stored
-    `progress` is one of the previous model's values (`"none"` or `"in-progress"` — e.g. set
-    via devtools if no such map exists anymore), reload and open it → `"none"` reads as
-    "Not on Track" (✕) and `"in-progress"` reads as "On Track" (→), not as some fourth,
-    unrecognized state.
-13. **No regressions**: Create Strategy Map mode's text editing, add/remove
+    `progress` is the original four-state model's now-retired `"in-progress"` value (set via
+    devtools if no such map exists anymore), reload and open it → reads as "On Track" (yellow
+    light bulb), not as some unrecognized fifth state.
+13. **Migration is idempotent — assigning "Not on Track" survives a reload**: in Track
+    Performance, click an initiative's marker once so it reads "Not on Track" (red ✕), click
+    Save, reload the page, reopen the map → it still reads "Not on Track", not reset to blank.
+    (This is the failure mode of collapsing every stored `"not-on-track"` into the unset
+    default on read — it must not happen.)
+14. **No regressions**: Create Strategy Map mode's text editing, add/remove
     objectives/initiatives, click-to-connect/hover/remove, and
     Save/Rename/Back/unsaved-changes warning all still work exactly as in Phase 1.

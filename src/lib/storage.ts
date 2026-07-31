@@ -38,16 +38,23 @@ function writeEnvelope(envelope: Envelope): void {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(envelope));
 }
 
-// Maps saved before this initiative-progress revision may carry the old four-state model
-// (`"none" | "on-track" | "in-progress" | "not-on-track"`) or be missing the field entirely.
-type LegacyInitiativeProgress = InitiativeProgress | "none" | "in-progress" | undefined;
+// Maps saved before this initiative-progress revision may carry the original four-state
+// model's now-retired `"in-progress"` value, or be missing the field entirely. Every other
+// value (including `"none"` and `"not-on-track"`, both still valid today) must pass through
+// unchanged — this runs on every read, so it has to be idempotent, not just a one-time fixup.
+type LegacyInitiativeProgress = InitiativeProgress | "in-progress" | undefined;
 
 function normalizeInitiativeProgress(progress: LegacyInitiativeProgress): InitiativeProgress {
   if (progress === "in-progress") return "on-track";
-  if (progress === "not-on-track" || progress === "on-track" || progress === "complete") {
+  if (
+    progress === "none" ||
+    progress === "not-on-track" ||
+    progress === "on-track" ||
+    progress === "complete"
+  ) {
     return progress;
   }
-  return "not-on-track";
+  return "none";
 }
 
 function normalizeMap(saved: SavedMap): SavedMap {

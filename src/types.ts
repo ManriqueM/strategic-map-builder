@@ -1,4 +1,4 @@
-export type InitiativeProgress = "not-on-track" | "on-track" | "complete";
+export type InitiativeProgress = "none" | "not-on-track" | "on-track" | "complete";
 
 export interface Initiative {
   id: string;

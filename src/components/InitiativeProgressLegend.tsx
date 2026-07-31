@@ -1,5 +1,5 @@
 import {
-  INITIATIVE_PROGRESS_CYCLE,
+  LEGEND_INITIATIVE_PROGRESS,
   INITIATIVE_PROGRESS_LABEL_KEYS,
   INITIATIVE_PROGRESS_META,
 } from "../lib/initiativeProgressPalette";
@@ -12,7 +12,7 @@ export function InitiativeProgressLegend() {
   return (
     <div className="status-legend initiative-progress-legend">
       <div className="status-legend-label">{t("initiativeProgress.label")}</div>
-      {INITIATIVE_PROGRESS_CYCLE.map((progress) => {
+      {LEGEND_INITIATIVE_PROGRESS.map((progress) => {
         const meta = INITIATIVE_PROGRESS_META[progress];
         return (
           <div key={progress} className="status-legend-item">

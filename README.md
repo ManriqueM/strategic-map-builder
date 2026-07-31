@@ -24,9 +24,10 @@ connections, and track status over time, right in the browser.
   open, rename, duplicate, or delete any saved map. No account or backend required.
 - **Track Performance** — Switch a saved map into a read-only view and assign each objective
   an On Track / Needs Attention / Off Track status with a click, reflected as a colored
-  border, with a legend for reference. Each initiative also gets its own On Track / In
-  Progress / Not On Track marker — click its dot to cycle it. Both colorings only appear in
-  this view; Create Strategy Map always shows plain, neutral cards while you're authoring.
+  border, with a legend for reference. Each initiative starts as a blank marker and cycles
+  through Not on Track (✕) / On Track (💡) / Complete (✓) with its own click and legend. Both
+  only appear in this view; Create Strategy Map always shows plain, neutral cards while you're
+  authoring.
 - **Language selection** — Switch the app's own interface between English and Spanish from a
   selector on either screen; your choice is remembered. (Map content always stays exactly as
   you typed it, regardless of the interface language.)
@@ -76,7 +77,7 @@ npm run lint     # Run oxlint
 4. Click **Save** whenever you want to persist your changes.
 5. Switch to **Track Performance** mode to assign each objective's status: click a card to
    cycle it through On Track → Needs Attention → Off Track → no status. Click an initiative's
-   dot to cycle its own progress: On Track → In Progress → Not On Track → no progress.
+   marker to cycle its own progress: no progress → Not on Track → On Track → Complete.
 6. Use the language selector in the header to switch the interface between English and
    Spanish at any time.
 
@@ -106,8 +107,8 @@ strategy-map-builder/
       perspectives, plus click-to-connect objectives with bezier connectors, in one mode.
 - [x] **Phase 2 — Save/Load**: Persist maps to `localStorage`, with a My Maps list.
 - [x] **Phase 3 — Track Performance**: On-track / needs-attention / off-track objective
-      status and on-track / in-progress / not-on-track initiative progress, both with color
-      coding shown only in this view.
+      status and a blank-by-default not-on-track / on-track / complete initiative progress,
+      both with icon + color coding and a legend, shown only in this view.
 - [x] **Phase 4 — Language selection**: English/Spanish interface with a persisted language
       switcher.
 

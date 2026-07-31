@@ -47,14 +47,26 @@ with `interactive={false}`) but aren't editable there.
 never applies `objective.status`'s color — only `InteractiveObjectiveCard` (Track Performance)
 does, via inline `style={{ borderTopColor: STATUS_META[...].color }}`. The same split applies
 one level down: each initiative has its own `progress: InitiativeProgress` field
-(`lib/initiativeProgressPalette.ts`, mirrors `statusPalette.ts` but with its own label set —
-On Track/In Progress/Not On Track). Its dot is a plain, non-interactive `<div>` in
+(`lib/initiativeProgressPalette.ts`, mirrors `statusPalette.ts`) with four states — `"none"`
+(the true default: a blank square icon, deliberately unassigned so it prompts the user to fill
+it in), `"not-on-track"` (red ✕), `"on-track"` (amber light bulb — intentionally the *same*
+amber token as the objective legend's "Needs Attention"; the icon disambiguates the two, not
+the color), and `"complete"` (green ✓). Icons render via the shared
+`InitiativeProgressIcon.tsx` (stroke-based SVG shapes, `currentColor`), used by both the
+marker and `InitiativeProgressLegend.tsx`. The click-cycle order
+(`INITIATIVE_PROGRESS_CYCLE`: none → not-on-track → on-track → complete) and the legend's
+display order (`LEGEND_INITIATIVE_PROGRESS`: complete, on-track, not-on-track — sorted to
+match the objective legend's green→amber→red sequence) are deliberately different arrays; don't
+assume they should stay in sync. The marker is a plain, non-interactive `<div>` in
 `InitiativeRow.tsx` (Create mode) but a colored, clickable `<button>` in
 `InteractiveObjectiveCard.tsx` (Track Performance) that calls `e.stopPropagation()` before
 dispatching `SET_INITIATIVE_PROGRESS`, so clicking it never also cycles the parent card's
-objective status. When adding a new per-objective or per-initiative field like these, default
-it to `"none"` in both `defaultMap.ts` and the relevant `ADD_*` reducer case, and decide
-up front which mode(s) it should render/be editable in — don't assume "shows everywhere."
+objective status. `storage.ts`'s `normalizeMap` must stay idempotent here: every valid current
+value (including `"none"` and `"not-on-track"`) has to pass through unchanged on every read —
+only the original model's now-retired `"in-progress"` value gets remapped (→ `"on-track"`).
+When adding a new per-objective or per-initiative field like these, default it to `"none"` in
+both `defaultMap.ts` and the relevant `ADD_*` reducer case, and decide up front which mode(s)
+it should render/be editable in — don't assume "shows everywhere."
 
 **Connector geometry** (`src/lib/connectorGeometry.ts` + `state/useConnectorPaths.ts` +
 `state/useObjectiveBoxRefs.ts`): connections are always drawn from the top-center of the

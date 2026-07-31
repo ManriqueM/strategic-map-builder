@@ -73,6 +73,7 @@ export const en = {
   },
   initiativeProgress: {
     label: "Progress",
+    notSet: "Not set",
     notOnTrack: "Not on Track",
     onTrack: "On Track",
     complete: "Complete",
