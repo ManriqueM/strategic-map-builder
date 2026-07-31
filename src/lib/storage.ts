@@ -1,3 +1,4 @@
+import { createExampleSavedMaps } from "./exampleMaps";
 import type { InitiativeProgress, StrategyMap } from "../types";
 
 const STORAGE_KEY = "strategy-map-builder:maps";
@@ -20,9 +21,21 @@ function emptyEnvelope(): Envelope {
   return { version: ENVELOPE_VERSION, maps: {} };
 }
 
+// First-ever visit (no key in localStorage at all): seed two example maps so the public
+// deployment isn't a blank slate. Only triggers on a truly absent key — deleting every map
+// afterward leaves an existing-but-empty envelope, which must not re-seed.
+function seededEnvelope(): Envelope {
+  const envelope = emptyEnvelope();
+  for (const saved of createExampleSavedMaps()) {
+    envelope.maps[saved.id] = saved;
+  }
+  writeEnvelope(envelope);
+  return envelope;
+}
+
 function readEnvelope(): Envelope {
   const raw = localStorage.getItem(STORAGE_KEY);
-  if (!raw) return emptyEnvelope();
+  if (!raw) return seededEnvelope();
   try {
     const parsed = JSON.parse(raw);
     if (!parsed || typeof parsed !== "object" || typeof parsed.maps !== "object") {
