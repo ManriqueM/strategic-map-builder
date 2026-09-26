@@ -9,7 +9,7 @@ export const INITIATIVE_PROGRESS_META: Record<InitiativeProgress, { color: strin
 
 // Click-to-cycle order: a natural lifecycle progression (unset -> struggling -> on track ->
 // done), independent of the legend's display order below.
-export const INITIATIVE_PROGRESS_CYCLE: InitiativeProgress[] = [
+const INITIATIVE_PROGRESS_CYCLE: InitiativeProgress[] = [
   "none",
   "not-on-track",
   "on-track",
