@@ -7,7 +7,7 @@ export const STATUS_META: Record<ObjectiveStatus, { color: string }> = {
   "off-track": { color: "var(--color-status-off-track)" },
 };
 
-export const STATUS_CYCLE: ObjectiveStatus[] = [
+const STATUS_CYCLE: ObjectiveStatus[] = [
   "none",
   "on-track",
   "needs-attention",

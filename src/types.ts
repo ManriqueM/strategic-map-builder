@@ -22,7 +22,7 @@ export interface Perspective {
   objectives: Objective[];
 }
 
-export interface Sections {
+interface Sections {
   mission: { visible: boolean; text: string };
   vision: { visible: boolean; text: string };
   values: { visible: boolean; items: { id: string; text: string }[] };
